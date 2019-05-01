@@ -4,7 +4,7 @@
     role="navigation"
     aria-label="main navigation"
   >
-    <div class="navbar-brand navbar-start">
+    <div class="navbar-start">
       <a
         class="navbar-burger"
         role="button"
@@ -16,17 +16,31 @@
         <span aria-hidden="true"></span>
       </a>
     </div>
-    <a href="/" class="navbar-item">Vinietaap</a>
-    <div class="navbar-item">
-      <search />
+    <div class="navbar-brand">
+      <nuxt-link class="navbar-item" title="home" to="/">
+        VignietAap
+      </nuxt-link>
     </div>
-    <div class="navbar-end">
-      <div class="navbar-item">
-        <signIn />
+    <div class="navbar-start">
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Categories
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item">
+            categoryLabel
+          </a>
+        </div>
       </div>
+      <nuxt-link class="navbar-item has-text-white" title="Profile" to="/">
+        Profile
+      </nuxt-link>
       <div class="navbar-item">
-        <signOut />
+        <search />
       </div>
+    </div>
+    <div class="navbar-item">
+      <signIn />
     </div>
   </nav>
 </template>
@@ -34,14 +48,12 @@
 <script>
 import search from '~/components/headBar/Search'
 import signIn from '~/components/headBar/SignIn'
-import signOut from '~/components/headBar/SignOut'
 
 export default {
   name: 'HeadBar',
   components: {
     search,
-    signIn,
-    signOut
+    signIn
   }
 }
 </script>
