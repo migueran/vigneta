@@ -1,33 +1,22 @@
 <template>
   <section class="container">
-    <div>
-      <HeadBar />
-      <h1 class="title">
-        vigneta
-      </h1>
-      <h2 class="subtitle">
-        a comick app
-      </h2>
+    <div class="section">
+      <headBar />
     </div>
+    <comickList />
   </section>
 </template>
 
 <script>
 import HeadBar from '~/components/HeadBar'
+import ComickList from '@/components/ComickList'
 
 export default {
   components: {
-    HeadBar
+    HeadBar,
+    ComickList
   }
 }
 </script>
 
-<style lang="sass">
-.container
-  margin: 0 auto
-  min-height: 100vh
-  display: flex
-  justify-content: center
-  align-items: center
-  text-align: center
-</style>
+<style lang="sass"></style>
