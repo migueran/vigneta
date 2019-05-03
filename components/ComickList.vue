@@ -63,12 +63,13 @@
     </div>
     <div v-else class="container is-fullwidth">
       There are no comicks. Lets add one now<br /><br />
-      {{ ip }}
     </div>
   </section>
 </template>
 
 <script>
+import ComicksService from '~/services/ComicksService'
+
 export default {
   name: 'ComickList',
   data() {
@@ -81,8 +82,8 @@ export default {
   },
   methods: {
     async fetchComicks() {
-      const { data } = await this.$axios.get(`http://localhost:8081/comicks`)
-      this.comicks = data.comicks
+      const response = await ComicksService.fetchComicks()
+      this.comicks = response.data.comicks
     }
   }
 }
