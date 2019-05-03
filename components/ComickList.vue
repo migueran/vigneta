@@ -1,6 +1,6 @@
 <template>
   <section class="section">
-    <div class="container">
+    <div v-if="comicks.length > 0" class="container">
       <table id="comickList" class="table has-background-black is-fullwidth">
         <thead>
           <tr>
@@ -19,13 +19,26 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>comick.title</td>
-            <td>comick.description</td>
-            <td></td>
-            <td class="has-text-right">comick.cuadros.length</td>
-            <td>comick.authorDisplayName</td>
-            <td>comick.CreatedTo | dateFormat</td>
+          <tr v-for="comick in comicks" :key="comick._id">
+            <td>{{ comick.title }}</td>
+            <td>{{ comick.description }}</td>
+            <td>
+              <span class="tags">
+                <span
+                  v-for="(categoryLabel, index) in comick.category"
+                  :key="index"
+                  class="tag is-dark"
+                >
+                  {{ categoryLabel }}&nbsp;
+                  <a class="is-small" :href="'/category/' + categoryLabel">
+                    <i class="fas fa-link"></i>
+                  </a>
+                </span>
+              </span>
+            </td>
+            <td class="has-text-right">{{ comick.cuadros.length }}</td>
+            <td>{{ comick.authorDisplayName }}</td>
+            <td>{{ comick.CreatedTo | dateFormat }}</td>
             <td class="has-text-centered">
               <i class="fab fa-firstdraft disabled" title="Draft"></i>
               <i class="fa fa-file has-text-primary" title="Final"></i>
@@ -48,15 +61,30 @@
         </tbody>
       </table>
     </div>
-    <div class="container is-fullwidth">
+    <div v-else class="container is-fullwidth">
       There are no comicks. Lets add one now<br /><br />
+      {{ ip }}
     </div>
   </section>
 </template>
 
 <script>
 export default {
-  name: 'ComickList'
+  name: 'ComickList',
+  data() {
+    return {
+      comicks: ''
+    }
+  },
+  mounted() {
+    this.fetchComicks()
+  },
+  methods: {
+    async fetchComicks() {
+      const { data } = await this.$axios.get(`http://localhost:8081/comicks`)
+      this.comicks = data.comicks
+    }
+  }
 }
 </script>
 
