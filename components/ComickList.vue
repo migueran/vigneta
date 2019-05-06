@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import ComicksService from '~/services/ComicksService'
+import ComicksService from '~/api/ComicksService'
 
 export default {
   name: 'ComickList',
