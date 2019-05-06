@@ -87,10 +87,16 @@
 </template>
 
 <script>
+import moment from 'moment'
 import ComicksService from '~/api/ComicksService'
 
 export default {
   name: 'ComickList',
+  filters: {
+    dateFormat(value) {
+      return moment(value).format('MMMM DD, YYYY')
+    }
+  },
   data() {
     return {
       comicks: ''
