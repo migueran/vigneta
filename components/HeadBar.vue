@@ -27,9 +27,14 @@
           Categories
         </a>
         <div class="navbar-dropdown">
-          <a class="navbar-item">
-            categoryLabel
-          </a>
+          <nuxt-link
+            v-for="(categoryLabel, index) in CategoryList"
+            :key="index"
+            class="navbar-item"
+            :to="'/category/' + categoryLabel"
+          >
+            {{ categoryLabel }}
+          </nuxt-link>
         </div>
       </div>
       <nuxt-link
@@ -52,12 +57,21 @@
 <script>
 import search from '~/components/headBar/Search'
 import signIn from '~/components/headBar/SignIn'
+import CategoryList from '@/api/CategoryService'
 
 export default {
   name: 'HeadBar',
   components: {
     search,
     signIn
+  },
+  data() {
+    return {
+      CategoryList: []
+    }
+  },
+  mounted() {
+    this.CategoryList = CategoryList.category
   }
 }
 </script>
