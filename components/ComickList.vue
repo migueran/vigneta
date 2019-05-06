@@ -54,20 +54,20 @@
               >
                 <i class="far fa-edit"></i>
               </nuxt-link>
-              <nuxt-link
-                to="/"
+              <a
                 class="button is-primary is-outlined is-small"
                 title="delete"
+                @click="deleteComick(comick._id)"
               >
                 <i class="far fa-trash-alt"></i>
-              </nuxt-link>
-              <nuxt-link
-                to="/"
+              </a>
+              <a
                 class="button is-primary is-outlined is-small"
                 title="duplicate"
+                @click="duplicateComick(comick)"
               >
                 <i class="far fa-clone"></i>
-              </nuxt-link>
+              </a>
               <nuxt-link
                 :to="'/comicks/' + comick._id + '/play'"
                 class="button is-primary is-outlined is-small"
@@ -101,8 +101,27 @@ export default {
   },
   methods: {
     async fetchComicks() {
-      const response = await ComicksService.fetchComicks()
+      let response
+      const category = this.$route.params.category
+      if (category !== undefined) {
+        response = await ComicksService.fetchComickPerCategory(category)
+      } else {
+        response = await ComicksService.fetchComicks()
+      }
       this.comicks = response.data.comicks
+    },
+    async deleteComick(id) {
+      await ComicksService.deleteComick(id)
+    },
+    async duplicateComick(newComick) {
+      await ComicksService.addComick({
+        title: newComick.title,
+        description: newComick.description,
+        author_id: 'author_id',
+        authorDisplayName: 'displayName',
+        category: newComick.category,
+        draft: newComick.draft
+      })
     }
   }
 }
