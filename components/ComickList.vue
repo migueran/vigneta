@@ -50,16 +50,29 @@
               <nuxt-link
                 :to="'/comicks/' + comick._id + '/edit'"
                 class="button is-primary is-outlined is-small"
+                title="edit"
               >
                 <i class="far fa-edit"></i>
               </nuxt-link>
-              <nuxt-link to="/" class="button is-primary is-outlined is-small">
+              <nuxt-link
+                to="/"
+                class="button is-primary is-outlined is-small"
+                title="delete"
+              >
                 <i class="far fa-trash-alt"></i>
               </nuxt-link>
-              <nuxt-link to="/" class="button is-primary is-outlined is-small">
+              <nuxt-link
+                to="/"
+                class="button is-primary is-outlined is-small"
+                title="duplicate"
+              >
                 <i class="far fa-clone"></i>
               </nuxt-link>
-              <nuxt-link to="/" class="button is-primary is-outlined is-small">
+              <nuxt-link
+                :to="'/comicks/' + comick._id + '/play'"
+                class="button is-primary is-outlined is-small"
+                title="play"
+              >
                 <i class="far fa-play-circle"></i>
               </nuxt-link>
             </td>

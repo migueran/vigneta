@@ -3,18 +3,11 @@
     <div class="section">
       <headBar />
     </div>
-    <comickList />
   </section>
 </template>
 
 <script>
-import HeadBar from '~/components/HeadBar'
-
-export default {
-  components: {
-    HeadBar
-  }
-}
+export default {}
 </script>
 
 <style lang="sass"></style>
