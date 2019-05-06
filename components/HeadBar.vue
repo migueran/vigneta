@@ -32,7 +32,11 @@
           </a>
         </div>
       </div>
-      <nuxt-link class="navbar-item has-text-white" title="Profile" to="/">
+      <nuxt-link
+        class="navbar-item has-text-white"
+        title="Profile"
+        to="/profile"
+      >
         Profile
       </nuxt-link>
       <div class="navbar-item">

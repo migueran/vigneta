@@ -30,9 +30,12 @@
                   class="tag is-dark"
                 >
                   {{ categoryLabel }}&nbsp;
-                  <a class="is-small" :href="'/category/' + categoryLabel">
+                  <nuxt-link
+                    class="is-small"
+                    :to="'/category/' + categoryLabel"
+                  >
                     <i class="fas fa-link"></i>
-                  </a>
+                  </nuxt-link>
                 </span>
               </span>
             </td>
@@ -44,7 +47,10 @@
               <i class="fa fa-file has-text-primary" title="Final"></i>
             </td>
             <td class="has-text-centered">
-              <nuxt-link to="/" class="button is-primary is-outlined is-small">
+              <nuxt-link
+                :to="'/comicks/' + comick._id + '/edit'"
+                class="button is-primary is-outlined is-small"
+              >
                 <i class="far fa-edit"></i>
               </nuxt-link>
               <nuxt-link to="/" class="button is-primary is-outlined is-small">
