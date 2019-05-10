@@ -1,12 +1,75 @@
 <template>
   <div>
-    CuadroList
+    <h2 class="subtitle">Cuadros in comick: {{ comickTitulo }}</h2>
+    <table id="cuadroList" class="table has-background-black is-fullwidth">
+      <thead>
+        <tr>
+          <th>order</th>
+          <th>elems</th>
+          <th class="has-text-centered">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(cuadro, index) in comickCuadros" :key="index">
+          <td>{{ index + 1 }}</td>
+          <td>{{ cuadro.elem | toLength }}</td>
+          <td class="has-text-right">
+            <a
+              class="button is-primary is-outlined is-small"
+              title="Edit Cuadro"
+            >
+              <i class="far fa-edit"></i>
+            </a>
+            <a
+              class="button is-primary is-outlined is-small"
+              title="Delete cuadro"
+            >
+              <i class="far fa-trash-alt"></i>
+            </a>
+            <a
+              class="button is-primary is-outlined is-small"
+              title="Duplicate cuadro"
+            >
+              <i class="far fa-clone"></i>
+            </a>
+            <a
+              class="button is-primary is-outlined is-small"
+              title="show cuadro"
+            >
+              <i class="far fa-play-circle"></i>
+            </a>
+            <a
+              class="button is-primary is-outlined is-small"
+              title="add cuadro after"
+            >
+              <i class="fa fa-plus"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
-
 <script>
 export default {
-  name: 'CuadroList'
+  name: 'CuadroList',
+  filters: {
+    toLength(value) {
+      return 'xx'
+    }
+  },
+  props: {
+    comickTitulo: {
+      type: String,
+      default: 'value'
+    },
+    comickCuadros: {
+      type: Object,
+      default: function() {
+        return { message: 'hello' }
+      }
+    }
+  }
 }
 </script>
 
