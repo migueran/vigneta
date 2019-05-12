@@ -69,7 +69,7 @@
                 <i class="far fa-clone"></i>
               </a>
               <nuxt-link
-                :to="'/comicks/' + comick._id + '/play'"
+                :to="'/comicks/' + comick._id + '/0/play'"
                 class="button is-primary is-outlined is-small"
                 title="play"
               >

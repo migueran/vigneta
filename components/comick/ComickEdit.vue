@@ -54,8 +54,8 @@
               <select v-model="selectCategory">
                 <option :value="null" disabled>Select a category</option>
                 <option
+                  v-for="(categoryLabel, index) in CategoryList"
                   :key="index"
-                  :for="(categoryLabel, index) in CategoryList"
                   :value="categoryLabel"
                 >
                   {{ categoryLabel }}

@@ -2,7 +2,7 @@
   <section class="container">
     <div class="section">
       <headBar />
-      cuadro/play
+      cuadro/edit
     </div>
   </section>
 </template>

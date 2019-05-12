@@ -14,12 +14,13 @@
           <td>{{ index + 1 }}</td>
           <td>{{ cuadro.elem | toLength }}</td>
           <td class="has-text-right">
-            <a
+            <nuxt-link
+              :to="index + '/edit'"
               class="button is-primary is-outlined is-small"
               title="Edit Cuadro"
             >
               <i class="far fa-edit"></i>
-            </a>
+            </nuxt-link>
             <a
               class="button is-primary is-outlined is-small"
               title="Delete cuadro"
@@ -32,12 +33,13 @@
             >
               <i class="far fa-clone"></i>
             </a>
-            <a
+            <nuxt-link
+              :to="index + '/play'"
               class="button is-primary is-outlined is-small"
               title="show cuadro"
             >
               <i class="far fa-play-circle"></i>
-            </a>
+            </nuxt-link>
             <a
               class="button is-primary is-outlined is-small"
               title="add cuadro after"
@@ -55,7 +57,11 @@ export default {
   name: 'CuadroList',
   filters: {
     toLength(value) {
-      return 'xx'
+      if (value !== undefined) {
+        return value.length
+      } else {
+        return '?'
+      }
     }
   },
   props: {
