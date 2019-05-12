@@ -37,6 +37,7 @@ export default {
         id: this.$route.params.id
       })
       this.Comick = response.data
+      ComicksService.saveComickInSessionStorage(this.Comick)
     }
   }
 }

@@ -24,12 +24,14 @@
             <a
               class="button is-primary is-outlined is-small"
               title="Delete cuadro"
+              @click="deleteCuadro(index)"
             >
               <i class="far fa-trash-alt"></i>
             </a>
             <a
               class="button is-primary is-outlined is-small"
               title="Duplicate cuadro"
+              @click="duplicateCuadro(index, cuadro)"
             >
               <i class="far fa-clone"></i>
             </a>
@@ -43,6 +45,7 @@
             <a
               class="button is-primary is-outlined is-small"
               title="add cuadro after"
+              @click="addCuadro(index)"
             >
               <i class="fa fa-plus"></i>
             </a>
@@ -52,7 +55,10 @@
     </table>
   </div>
 </template>
+
 <script>
+import CuadroService from '~/api/CuadroService'
+
 export default {
   name: 'CuadroList',
   filters: {
@@ -74,6 +80,47 @@ export default {
       default: function() {
         return { message: 'hello' }
       }
+    }
+  },
+  methods: {
+    async addCuadro(indexCuadro) {
+      indexCuadro += 1
+      const newCuadro = {
+        bkgCuadro: '',
+        elem: {
+          zIndex: 1,
+          typeElem: '',
+          contentToTxtTxtBkgOrBkg: '',
+          txt: '',
+          bkg: '',
+          transition: {
+            enter: '',
+            leave: ''
+          },
+          style: '',
+          spanStyleToTxtBkg: ''
+        }
+      }
+      this.comickCuadros.splice(indexCuadro, 0, newCuadro)
+      await CuadroService.addCuadroToComickPerID({
+        id: this.$route.params.id,
+        newCuadro: newCuadro
+      })
+    },
+    async deleteCuadro(index) {
+      this.comickCuadros.splice(index, 1)
+      await CuadroService.delCuadroToComickPerID({
+        id: this.$route.params.id,
+        cuadroIndex: index
+      })
+    },
+    async duplicateCuadro(indexCuadro, newCuadro) {
+      indexCuadro += 1
+      this.comickCuadros.splice(indexCuadro, 0, newCuadro)
+      await CuadroService.addCuadroToComickPerID({
+        id: this.$route.params.id,
+        newCuadro: newCuadro
+      })
     }
   }
 }
