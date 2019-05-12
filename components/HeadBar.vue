@@ -57,7 +57,7 @@
 <script>
 import search from '~/components/headBar/Search'
 import signIn from '~/components/headBar/SignIn'
-import CategoryList from '@/api/CategoryService'
+import CategoryList from '~/api/CategoryService'
 
 export default {
   name: 'HeadBar',

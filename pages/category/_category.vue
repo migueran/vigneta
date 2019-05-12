@@ -9,7 +9,7 @@
 
 <script>
 import HeadBar from '~/components/HeadBar'
-import ComickList from '@/components/ComickList'
+import ComickList from '~/components/ComickList'
 
 export default {
   components: {

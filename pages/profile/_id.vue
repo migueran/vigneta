@@ -11,7 +11,7 @@
 <script>
 import HeadBar from '~/components/HeadBar'
 import ProfileCRUD from '~/components/Profile/ProfileCRUD'
-import ComickList from '@/components/ComickList'
+import ComickList from '~/components/ComickList'
 
 export default {
   components: {

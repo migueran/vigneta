@@ -103,7 +103,7 @@ export default {
     comick: {
       type: Object,
       default: function() {
-        return { message: 'hello' }
+        return { message: 'comick' }
       }
     }
   },
