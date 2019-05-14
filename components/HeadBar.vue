@@ -9,19 +9,20 @@
         <nuxt-link class="navbar-item" title="home" to="/">
           VignietAap
         </nuxt-link>
+        <a
+          class="navbar-burger"
+          role="button"
+          aria-label="menu"
+          aria-expanded="false"
+          @click="showMenu = !showMenu"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
       </div>
-      <a
-        class="navbar-burger"
-        role="button"
-        aria-label="menu"
-        aria-expanded="false"
-      >
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
     </div>
-    <div class="navbar-menu">
+    <div class="navbar-menu" :class="{ 'is-active': showMenu }">
       <div class="navbar-end">
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
@@ -69,7 +70,8 @@ export default {
   },
   data() {
     return {
-      CategoryList: []
+      CategoryList: [],
+      showMenu: false
     }
   },
   mounted() {

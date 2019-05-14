@@ -1,6 +1,8 @@
 <template>
   <div class="container">
-    <headBar />
+    <section class="section">
+      <headBar />
+    </section>
     <section class="section">
       <comickList />
     </section>
