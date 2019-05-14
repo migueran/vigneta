@@ -5,6 +5,11 @@
     aria-label="main navigation"
   >
     <div class="navbar-start">
+      <div class="navbar-brand">
+        <nuxt-link class="navbar-item" title="home" to="/">
+          VignietAap
+        </nuxt-link>
+      </div>
       <a
         class="navbar-burger"
         role="button"
@@ -16,40 +21,37 @@
         <span aria-hidden="true"></span>
       </a>
     </div>
-    <div class="navbar-brand">
-      <nuxt-link class="navbar-item" title="home" to="/">
-        VignietAap
-      </nuxt-link>
-    </div>
-    <div class="navbar-start">
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          Categories
-        </a>
-        <div class="navbar-dropdown">
-          <nuxt-link
-            v-for="(categoryLabel, index) in CategoryList"
-            :key="index"
-            class="navbar-item"
-            :to="'/category/' + categoryLabel"
-          >
-            {{ categoryLabel }}
-          </nuxt-link>
+    <div class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            Categories
+          </a>
+          <div class="navbar-dropdown">
+            <nuxt-link
+              v-for="(categoryLabel, index) in CategoryList"
+              :key="index"
+              class="navbar-item"
+              :to="'/category/' + categoryLabel"
+            >
+              {{ categoryLabel }}
+            </nuxt-link>
+          </div>
+        </div>
+        <nuxt-link
+          class="navbar-item has-text-white"
+          title="Profile"
+          to="/profile"
+        >
+          Profile
+        </nuxt-link>
+        <div class="navbar-item">
+          <search />
+        </div>
+        <div class="navbar-item">
+          <signIn />
         </div>
       </div>
-      <nuxt-link
-        class="navbar-item has-text-white"
-        title="Profile"
-        to="/profile"
-      >
-        Profile
-      </nuxt-link>
-      <div class="navbar-item">
-        <search />
-      </div>
-    </div>
-    <div class="navbar-item">
-      <signIn />
     </div>
   </nav>
 </template>

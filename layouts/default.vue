@@ -20,4 +20,7 @@ html
   justify-content: center
   align-items: center
   text-align: center
+
+.text-is-nowrap
+  white-space: nowrap
 </style>

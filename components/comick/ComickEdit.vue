@@ -46,8 +46,6 @@
             </span>
           </span>
         </div>
-      </div>
-      <div class="field-body">
         <div class="field">
           <p class="control is-expanded has-icons-left">
             <span class="select is-fullwidth" name="category">

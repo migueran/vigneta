@@ -13,7 +13,7 @@
         <tr v-for="(cuadro, index) in comickCuadros" :key="index">
           <td>{{ index + 1 }}</td>
           <td>{{ cuadro.elem | toLength }}</td>
-          <td class="has-text-right">
+          <td class="has-text-right text-is-nowrap">
             <nuxt-link
               :to="index + '/edit'"
               class="button is-primary is-outlined is-small"

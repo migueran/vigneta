@@ -10,7 +10,7 @@
             <th>Length</th>
             <th>Author</th>
             <th>Created</th>
-            <th class="has-text-centered">
+            <th class="has-text-centered text-is-nowrap">
               <i class="fab fa-firstdraft disabled" title="Draft"></i>
               /
               <i class="fa fa-file has-text-primary" title="Final"></i>
@@ -46,7 +46,7 @@
               <i class="fab fa-firstdraft disabled" title="Draft"></i>
               <i class="fa fa-file has-text-primary" title="Final"></i>
             </td>
-            <td class="has-text-centered">
+            <td class="has-text-centered text-is-nowrap">
               <nuxt-link
                 :to="'/comicks/' + comick._id + '/edit'"
                 class="button is-primary is-outlined is-small"
