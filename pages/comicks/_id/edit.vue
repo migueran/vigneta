@@ -1,11 +1,12 @@
 <template>
-  <section class="container">
+  <div class="container">
+    <headBar />
     <div class="section">
-      <headBar />
       <comickEdit :comick="Comick" />
       <div class="field is-horizontal">
         <div class="field-body">
           <div class="field">
+            <br />
             <div class="control buttons is-right">
               <nuxt-link :to="'/profile'" class="button is-text" title="Cancel">
                 cancel
@@ -34,7 +35,7 @@
         :comick-cuadros="Comick.cuadros"
       />
     </div>
-  </section>
+  </div>
 </template>
 
 <script>

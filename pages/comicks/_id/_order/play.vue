@@ -1,14 +1,20 @@
 <template>
-  <section class="container">
-    <div class="section">
-      <headBar />
+  <div class="container">
+    <headBar />
+    <section class="section">
       cuadro/play
-    </div>
-  </section>
+    </section>
+  </div>
 </template>
 
 <script>
-export default {}
+import HeadBar from '~/components/HeadBar'
+
+export default {
+  components: {
+    HeadBar
+  }
+}
 </script>
 
 <style lang="sass"></style>

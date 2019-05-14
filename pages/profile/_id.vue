@@ -1,11 +1,11 @@
 <template>
-  <section class="container">
-    <div class="section">
-      <headBar />
-    </div>
-    <profileCRUD />
-    <comickList />
-  </section>
+  <div class="container">
+    <headBar />
+    <section class="section">
+      <profileCRUD />
+      <comickList />
+    </section>
+  </div>
 </template>
 
 <script>

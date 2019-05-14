@@ -1,5 +1,5 @@
 <template>
-  <section class="section">
+  <div>
     <div v-if="comicks.length > 0" class="container">
       <table id="comickList" class="table has-background-black is-fullwidth">
         <thead>
@@ -83,7 +83,7 @@
     <div v-else class="container is-fullwidth">
       There are no comicks. Lets add one now<br /><br />
     </div>
-  </section>
+  </div>
 </template>
 
 <script>

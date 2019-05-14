@@ -1,10 +1,10 @@
 <template>
-  <section class="container">
-    <div class="section">
-      <headBar />
-    </div>
-    <comickList />
-  </section>
+  <div class="container">
+    <headBar />
+    <section class="section">
+      <comickList />
+    </section>
+  </div>
 </template>
 
 <script>
