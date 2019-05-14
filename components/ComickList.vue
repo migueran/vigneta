@@ -41,10 +41,12 @@
             </td>
             <td class="has-text-right">{{ comick.cuadros.length }}</td>
             <td>{{ comick.authorDisplayName }}</td>
-            <td>{{ comick.CreatedTo | dateFormat }}</td>
-            <td class="has-text-centered">
-              <i class="fab fa-firstdraft disabled" title="Draft"></i>
-              <i class="fa fa-file has-text-primary" title="Final"></i>
+            <td class="text-is-nowrap">{{ comick.CreatedTo | dateFormat }}</td>
+            <td v-if="comick.draft === true" class="has-text-centered">
+              <i class="fab fa-firstdraft disabled" title="Draft" />
+            </td>
+            <td v-if="comick.draft === false" class="has-text-centered">
+              <i class="fa fa-file has-text-primary" title="Final" />
             </td>
             <td class="has-text-centered text-is-nowrap">
               <nuxt-link
