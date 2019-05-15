@@ -176,6 +176,12 @@ export default {
     return {
       activeForm: false
     }
+  },
+  methods: {
+    cancelModifiedProfile() {
+      this.activeForm = !this.activeForm
+    },
+    ModifiedProfile() {}
   }
 }
 </script>
