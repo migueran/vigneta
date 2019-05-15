@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="is-fullwidth">
     <div class="field is-horizontal">
       <div class="field-body">
         <div class="field">

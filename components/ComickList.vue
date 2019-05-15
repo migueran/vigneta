@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div v-if="comicks.length > 0" class="container">
+  <div class="hero">
+    <div v-if="comicks.length > 0" class="hero-body is-fullwidth">
       <table id="comickList" class="table has-background-black is-fullwidth">
         <thead>
           <tr>
@@ -82,7 +82,7 @@
         </tbody>
       </table>
     </div>
-    <div v-else class="container is-fullwidth">
+    <div v-else class="hero-body is-fullwidth">
       There are no comicks. Lets add one now<br /><br />
     </div>
   </div>
