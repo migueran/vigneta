@@ -1,13 +1,13 @@
 <template>
   <div class="is-fullwidth">
     <div class="field is-horizontal">
-      <div class="field-body">
-        <div class="field">
+      <div class="field-body columns">
+        <div class="field column is-11">
           <p class="control">
             <input v-model="comick.title" type="text" class="input" />
           </p>
         </div>
-        <div class="field level is-narrow">
+        <div class="field level is-narrow column is-1">
           <p class="control">
             draft:
             <input v-model="comick.draft" class="checkbox" type="checkbox" />
@@ -16,8 +16,8 @@
       </div>
     </div>
     <div class="field is-horizontal">
-      <div class="field-body">
-        <div class="field">
+      <div class="field-body columns">
+        <div class="field column is-12">
           <div class="control">
             <textarea
               v-model="comick.description"
@@ -30,8 +30,8 @@
       </div>
     </div>
     <div class="field is-horizontal">
-      <div class="field-body">
-        <div class="field">
+      <div class="field-body columns">
+        <div class="field column is-4">
           <span class="tags">
             <span
               v-for="(categoryLabel, index) in comick.category"
@@ -46,7 +46,7 @@
             </span>
           </span>
         </div>
-        <div class="field">
+        <div class="field column is-3">
           <p class="control is-expanded has-icons-left">
             <span class="select is-fullwidth" name="category">
               <select v-model="selectCategory">
@@ -65,7 +65,7 @@
             </span>
           </p>
         </div>
-        <div class="field-body">
+        <div class="field-body column is-1">
           <div class="field">
             <button
               class="button is-text"
@@ -76,7 +76,7 @@
             </button>
           </div>
         </div>
-        <div class="field">
+        <div class="field column is-3">
           <p class="control is-expanded">
             <input
               v-model="user"

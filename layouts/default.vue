@@ -23,4 +23,7 @@ html
 
 .text-is-nowrap
   white-space: nowrap
+
+.text-is-wrap
+  white-space: nowrap
 </style>
