@@ -2,6 +2,7 @@
   <div class="container">
     <headBar />
     <section class="section">
+      <h1 class="title has-text-left">{{ titlePage }}</h1>
       <profileCRUD />
       <comickList />
     </section>
@@ -18,6 +19,11 @@ export default {
     HeadBar,
     ProfileCRUD,
     ComickList
+  },
+  data() {
+    return {
+      titlePage: 'Profile'
+    }
   }
 }
 </script>
