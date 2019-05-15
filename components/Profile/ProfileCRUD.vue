@@ -171,7 +171,12 @@
 
 <script>
 export default {
-  name: 'ProfileCRUD'
+  name: 'ProfileCRUD',
+  data() {
+    return {
+      activeForm: false
+    }
+  }
 }
 </script>
 
