@@ -2,12 +2,12 @@
   <div class="is-fullwidth">
     <div class="field is-horizontal">
       <div class="field-body columns">
-        <div class="field column is-11">
+        <div class="field column is-10">
           <p class="control">
             <input v-model="comick.title" type="text" class="input" />
           </p>
         </div>
-        <div class="field level is-narrow column is-1">
+        <div class="field level is-narrow column is-2">
           <p class="control">
             draft:
             <input v-model="comick.draft" class="checkbox" type="checkbox" />
@@ -55,6 +55,7 @@
                   v-for="(categoryLabel, index) in CategoryList"
                   :key="index"
                   :value="categoryLabel"
+                  :disabled="isCategoryInComick(categoryLabel, comick.category)"
                 >
                   {{ categoryLabel }}
                 </option>
@@ -101,7 +102,7 @@ export default {
     comick: {
       type: Object,
       default: function() {
-        return { message: 'comick' }
+        return { category: [] }
       }
     }
   },
@@ -117,15 +118,30 @@ export default {
   },
   methods: {
     addCategory(newCategory) {
-      this.comick.category = this.addNonRepeatedItemToList(
-        newCategory,
-        this.comick.category
-      )
+      this.comick.category.push(newCategory)
       this.selectCategory = null
     },
-    addNonRepeatedItemToList(newItem, itemList) {
+    deleteCategory(deleteThisCategory, itemList) {
+      let index = 0
+      if (itemList === undefined) {
+        itemList = this.comick.category
+      }
+      while (index < itemList.length) {
+        if (itemList[index] !== deleteThisCategory) {
+          index++
+        } else {
+          itemList.splice(index, 1)
+          index = itemList.length
+        }
+      }
+      return itemList
+    },
+    isCategoryInComick(newItem, itemList) {
       let matched = false
       let index = 0
+      if (itemList === undefined) {
+        return true
+      }
       while (index < itemList.length) {
         if (itemList[index] !== newItem) {
           index++
@@ -134,10 +150,7 @@ export default {
           matched = true
         }
       }
-      if (!matched) {
-        itemList.push(newItem)
-      }
-      return itemList
+      return matched
     }
   }
 }
