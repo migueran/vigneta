@@ -18,12 +18,26 @@
 <script>
 export default {
   name: 'CuadroPlay',
-  props: [
-    'thisCuadro',
-    'thisCuadroIndex',
-    'thisCuadroIndexDisplay',
-    'thisComickId'
-  ],
+  props: {
+    thisCuadro: {
+      type: Object,
+      default: function() {
+        return { message: 'hello' }
+      }
+    },
+    thisCuadroIndex: {
+      type: Number,
+      default: 0
+    },
+    thisCuadroIndexDisplay: {
+      type: Number,
+      default: 0
+    },
+    thisComickId: {
+      type: Number,
+      default: 0
+    }
+  },
   methods: {
     getImage(image) {
       const urlImage = require('@/assets/' + image)

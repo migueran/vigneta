@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h2 class="subtitle">Cuadros in comick: {{ comickTitulo }}</h2>
+    <h2 class="subtitle has-text-left is-primary">
+      Cuadros in comick: <strong>{{ comickTitulo }}</strong>
+    </h2>
     <table id="cuadroList" class="table has-background-black is-fullwidth">
       <thead>
         <tr>
