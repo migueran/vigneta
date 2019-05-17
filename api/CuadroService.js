@@ -8,7 +8,9 @@ export default {
       sessionStorage.setItem(params.id, JSON.stringify(comick))
       ComicksService.updateComickInBD(params.id)
     } else {
-      alert('no existe en local host el comick' + params.id)
+      /* eslint-disable no-console */
+      console.log('no existe en local host el comick' + params.id)
+      /* eslint-enable no-console */
     }
   },
 
@@ -19,7 +21,9 @@ export default {
       sessionStorage.setItem(params.id, JSON.stringify(comick))
       ComicksService.updateComickInBD(params.id)
     } else {
-      alert('no existe en local host el comick' + params.id)
+      /* eslint-disable no-console */
+      console.log('no existe en local host el comick' + params.id)
+      /* eslint-enable no-console */
     }
   },
 

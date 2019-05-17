@@ -7,11 +7,13 @@
       >
         <span :style="elem.spanStyleToTxtBkg">
           <span class="content">{{ elem.txt }}</span>
-          <img v-if="elem.typeElem != 'txt'" :src="getImage(elem.bkg)" />
+          <img v-if="elem.typeElem != 'txt'" src="~assets/00002txt01.png" />
         </span>
       </div>
     </div>
-    <figure class="bkg"><img :src="getImage(thisCuadro.bkgCuadro)" /></figure>
+    <figure class="bkg">
+      <img src="~assets/00002.png" />
+    </figure>
   </main>
 </template>
 
@@ -22,14 +24,10 @@ export default {
     thisCuadro: {
       type: Object,
       default: function() {
-        return { message: 'hello' }
+        return { elem: 'hello' }
       }
     },
     thisCuadroIndex: {
-      type: Number,
-      default: 0
-    },
-    thisCuadroIndexDisplay: {
       type: Number,
       default: 0
     },
@@ -38,12 +36,7 @@ export default {
       default: 0
     }
   },
-  methods: {
-    getImage(image) {
-      const urlImage = require('@/assets/' + image)
-      return urlImage
-    }
-  }
+  methods: {}
 }
 </script>
 

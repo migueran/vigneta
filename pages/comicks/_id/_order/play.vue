@@ -3,10 +3,9 @@
     <headBar />
     <section class="section">
       <cuadroPlay
-        :this-Cuadro="thisCuadro"
-        :this-Cuadro-Index="cuadroIndex"
-        :this-Cuadro-Index-Display="cuadroIndexDisplay"
-        :this-Comick-Id="comick._id"
+        :this-cuadro="thisCuadro"
+        :this-cuadro-index="cuadroIndex"
+        :this-comick-id="comick._id"
       />
     </section>
   </div>
@@ -23,11 +22,24 @@ export default {
   },
   data() {
     return {
-      cuadroIndex: '',
-      cuadroIndexDisplay: '',
+      cuadroIndex: this.$route.params.order,
+      cuadroIndexDisplay: parseInt(this.$route.params.order) + 1,
       thisCuadro: {},
       comick: {
-        cuadros: []
+        _id: this.$route.params.id
+      }
+    }
+  },
+  mounted() {
+    this.getCuadro()
+  },
+  methods: {
+    getCuadro() {
+      if (sessionStorage.getItem(this.comick._id)) {
+        this.comick = JSON.parse(sessionStorage.getItem(this.comick._id))
+        this.thisCuadro = this.comick.cuadros[this.cuadroIndex]
+      } else {
+        this.$router.push({ name: '404' })
       }
     }
   }

@@ -18,7 +18,9 @@ export default {
       const comick = JSON.parse(sessionStorage.getItem(params))
       return Api().put('comicks/' + params, comick)
     } else {
-      alert('no existe en local host el comick' + params)
+      /* eslint-disable no-console */
+      console.log('no existe en local host el comick' + params)
+      /* eslint-enable no-console */
     }
   },
 
