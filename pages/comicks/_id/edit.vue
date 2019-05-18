@@ -3,10 +3,15 @@
     <headBar />
     <div class="section">
       <comickEdit :comick="Comick" />
+      <hr />
+      <cuadroList
+        :comick-titulo="Comick.title"
+        :comick-cuadros="Comick.cuadros"
+      />
+      <hr />
       <div class="field is-horizontal">
         <div class="field-body">
           <div class="field">
-            <br />
             <div class="control buttons is-right">
               <nuxt-link :to="'/profile'" class="button is-text" title="Cancel">
                 cancel
@@ -30,10 +35,6 @@
           </div>
         </div>
       </div>
-      <cuadroList
-        :comick-titulo="Comick.title"
-        :comick-cuadros="Comick.cuadros"
-      />
     </div>
   </div>
 </template>
