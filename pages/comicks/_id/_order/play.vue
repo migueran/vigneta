@@ -24,10 +24,12 @@ export default {
     return {
       cuadroIndex: this.$route.params.order,
       cuadroIndexDisplay: parseInt(this.$route.params.order) + 1,
-      thisCuadro: {},
-      comick: {
-        _id: this.$route.params.id
-      }
+      thisCuadro: {}
+    }
+  },
+  computed: {
+    comick() {
+      return this.$store.state.comick
     }
   },
   mounted() {
@@ -36,7 +38,7 @@ export default {
   methods: {
     getCuadro() {
       if (sessionStorage.getItem(this.comick._id)) {
-        this.comick = JSON.parse(sessionStorage.getItem(this.comick._id))
+        this.comick = JSON.parse(sessionStorage.getItem(this.comick.id))
         this.thisCuadro = this.comick.cuadros[this.cuadroIndex]
       } else {
         this.$router.push({ name: '404' })

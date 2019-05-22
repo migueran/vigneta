@@ -98,19 +98,16 @@ import CategoryList from '@/api/CategoryService'
 
 export default {
   name: 'ComickEdit',
-  props: {
-    comick: {
-      type: Object,
-      default: function() {
-        return { category: [] }
-      }
-    }
-  },
   data() {
     return {
       CategoryList: [],
       user: 'testUserDisplayName',
       selectCategory: null
+    }
+  },
+  computed: {
+    comick() {
+      return this.$store.state.comick
     }
   },
   mounted() {

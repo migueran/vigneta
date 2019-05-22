@@ -1,6 +1,6 @@
 <template>
   <div>
-    CuadroCRUD
+    edit/CuadroCRUD
   </div>
 </template>
 

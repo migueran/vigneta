@@ -2,12 +2,9 @@
   <div class="container">
     <headBar />
     <div class="section">
-      <comickEdit :comick="Comick" />
+      <comickEdit />
       <hr />
-      <cuadroList
-        :comick-titulo="Comick.title"
-        :comick-cuadros="Comick.cuadros"
-      />
+      <cuadroList />
       <hr />
       <div class="field is-horizontal">
         <div class="field-body">
@@ -51,26 +48,20 @@ export default {
     ComickEdit,
     CuadroList
   },
-  data() {
-    return {
-      Comick: {
-        cuadros: {}
-      }
+  computed: {
+    Comick() {
+      this.getComick()
+      return this.$store.state.comick
     }
-  },
-  mounted() {
-    this.getComick()
   },
   methods: {
     async getComick() {
       const response = await ComicksService.getComick({
         id: this.$route.params.id
       })
-      this.Comick = response.data
-      ComicksService.saveComickInSessionStorage(this.Comick)
+      this.$store.commit('comick/set', response.data)
     },
     async updateComick() {
-      ComicksService.saveComickInSessionStorage(this.Comick)
       await ComicksService.updateComickInBD(this.$route.params.id)
     },
     async addCuadro() {}

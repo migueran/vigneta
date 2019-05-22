@@ -2,17 +2,19 @@
   <div class="container">
     <headBar />
     <section class="section">
-      cuadro/edit
+      <cuadroCRUD />
     </section>
   </div>
 </template>
 
 <script>
 import HeadBar from '~/components/HeadBar'
+import CuadroCRUD from '~/components/cuadro/CuadroCRUD'
 
 export default {
   components: {
-    HeadBar
+    HeadBar,
+    CuadroCRUD
   }
 }
 </script>
