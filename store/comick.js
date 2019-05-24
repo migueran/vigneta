@@ -1,11 +1,24 @@
 export const state = () => ({
-  category: [],
-  cuadros: []
+  comick: {
+    title: '',
+    cuadros: []
+  }
 })
 
 export const mutations = {
-  set(state, comick) {
-    state = comick
-    alert(state.title)
+  SET_COMICK(state, comick) {
+    state.comick = comick
+  }
+}
+
+export const actions = {
+  set({ commit }, comick) {
+    commit('SET_COMICK', comick)
+  }
+}
+
+export const getters = {
+  getComick(state) {
+    return state.comick
   }
 }

@@ -41,6 +41,7 @@ import HeadBar from '~/components/HeadBar'
 import ComickEdit from '~/components/comick/ComickEdit'
 import CuadroList from '~/components/cuadro/CuadroList'
 import ComicksService from '~/api/ComicksService'
+import { mapState } from 'vuex'
 
 export default {
   components: {
@@ -49,17 +50,21 @@ export default {
     CuadroList
   },
   computed: {
-    Comick() {
-      this.getComick()
-      return this.$store.state.comick
-    }
+    ...mapState({
+      Comick() {
+        return this.$store.state.comick.comick
+      }
+    })
+  },
+  mounted() {
+    this.getComick()
   },
   methods: {
     async getComick() {
       const response = await ComicksService.getComick({
         id: this.$route.params.id
       })
-      this.$store.commit('comick/set', response.data)
+      this.$store.commit('comick/SET_COMICK', response.data)
     },
     async updateComick() {
       await ComicksService.updateComickInBD(this.$route.params.id)

@@ -107,7 +107,7 @@ export default {
   },
   computed: {
     comick() {
-      return this.$store.state.comick
+      return this.$store.state.comick.comick
     }
   },
   mounted() {

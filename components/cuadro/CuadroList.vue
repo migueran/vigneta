@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2 class="subtitle has-text-left is-primary">
-      Cuadros in comick: <strong>{{ comickTitulo }}</strong>
+      Cuadros in comick: <strong>{{ comick.title }}</strong>
     </h2>
     <table id="cuadroList" class="table has-background-black is-fullwidth">
       <thead>
@@ -12,7 +12,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(cuadro, index) in comickCuadros" :key="index">
+        <tr v-for="(cuadro, index) in comick.cuadros" :key="index">
           <td>{{ index + 1 }}</td>
           <td>{{ cuadro.elem | toLength }}</td>
           <td class="has-text-right text-is-nowrap">
@@ -59,8 +59,6 @@
 </template>
 
 <script>
-import CuadroService from '~/api/CuadroService'
-
 export default {
   name: 'CuadroList',
   filters: {
@@ -72,20 +70,13 @@ export default {
       }
     }
   },
-  props: {
-    comickTitulo: {
-      type: String,
-      default: 'value'
-    },
-    comickCuadros: {
-      type: Object,
-      default: function() {
-        return { message: 'hello' }
-      }
+  computed: {
+    comick() {
+      return this.$store.state.comick.comick
     }
   },
   methods: {
-    async addCuadro(indexCuadro) {
+    addCuadro(indexCuadro) {
       indexCuadro += 1
       const newCuadro = {
         bkgCuadro: '',
@@ -103,26 +94,14 @@ export default {
           spanStyleToTxtBkg: ''
         }
       }
-      this.comickCuadros.splice(indexCuadro, 0, newCuadro)
-      await CuadroService.addCuadroToComickPerID({
-        id: this.$route.params.id,
-        newCuadro: newCuadro
-      })
+      this.comick.cuadros.splice(indexCuadro, 0, newCuadro)
     },
-    async deleteCuadro(index) {
-      this.comickCuadros.splice(index, 1)
-      await CuadroService.delCuadroToComickPerID({
-        id: this.$route.params.id,
-        cuadroIndex: index
-      })
+    deleteCuadro(index) {
+      this.comick.cuadros.splice(index, 1)
     },
-    async duplicateCuadro(indexCuadro, newCuadro) {
+    duplicateCuadro(indexCuadro, newCuadro) {
       indexCuadro += 1
-      this.comickCuadros.splice(indexCuadro, 0, newCuadro)
-      await CuadroService.addCuadroToComickPerID({
-        id: this.$route.params.id,
-        newCuadro: newCuadro
-      })
+      this.comick.cuadros.splice(indexCuadro, 0, newCuadro)
     }
   }
 }
