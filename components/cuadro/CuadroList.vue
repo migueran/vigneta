@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2 class="subtitle has-text-left is-primary">
-      Cuadros in comick: <strong>{{ comick.title }}</strong>
+      Cuadros in <strong>{{ title }}</strong>
     </h2>
     <table id="cuadroList" class="table has-background-black is-fullwidth">
       <thead>
@@ -12,9 +12,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(cuadro, index) in comick.cuadros" :key="index">
+        <tr v-for="(cuadro, index) in Cuadros" :key="index">
           <td>{{ index + 1 }}</td>
-          <td>{{ cuadro.elem | toLength }}</td>
+          <td>{{ cuadro | toLength }}</td>
           <td class="has-text-right text-is-nowrap">
             <nuxt-link
               :to="index + '/edit'"
@@ -59,21 +59,24 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'CuadroList',
   filters: {
     toLength(value) {
       if (value !== undefined) {
-        return value.length
+        return value.elem.length
       } else {
-        return '?'
+        return '1'
       }
     }
   },
   computed: {
-    comick() {
-      return this.$store.state.comick.comick
-    }
+    ...mapState({
+      title: state => state.comick.comick.title,
+      Cuadros: state => state.comick.comick.cuadros
+    })
   },
   methods: {
     addCuadro(indexCuadro) {
@@ -94,14 +97,14 @@ export default {
           spanStyleToTxtBkg: ''
         }
       }
-      this.comick.cuadros.splice(indexCuadro, 0, newCuadro)
+      this.$store.dispatch('comick/addCuadro', indexCuadro, newCuadro)
     },
     deleteCuadro(index) {
-      this.comick.cuadros.splice(index, 1)
+      this.$store.dispatch('comick/deleteCuadro', index)
     },
     duplicateCuadro(indexCuadro, newCuadro) {
       indexCuadro += 1
-      this.comick.cuadros.splice(indexCuadro, 0, newCuadro)
+      this.$store.dispatch('comick/duplicateCuadro', indexCuadro, newCuadro)
     }
   }
 }

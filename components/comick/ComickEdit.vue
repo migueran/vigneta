@@ -4,13 +4,18 @@
       <div class="field-body columns">
         <div class="field column is-10">
           <p class="control">
-            <input v-model="comick.title" type="text" class="input" />
+            <input
+              :value="Comick.title"
+              type="text"
+              class="input"
+              @input="updateTitle"
+            />
           </p>
         </div>
         <div class="field level is-narrow column is-2">
           <p class="control">
             draft:
-            <input v-model="comick.draft" class="checkbox" type="checkbox" />
+            <input :value="Comick.draft" class="checkbox" type="checkbox" />
           </p>
         </div>
       </div>
@@ -20,7 +25,7 @@
         <div class="field column is-12">
           <div class="control">
             <textarea
-              v-model="comick.description"
+              :value="Comick.description"
               class="textarea"
               rows="1"
               cols="32"
@@ -34,7 +39,7 @@
         <div class="field column is-4">
           <span class="tags">
             <span
-              v-for="(categoryLabel, index) in comick.category"
+              v-for="(categoryLabel, index) in Comick.category"
               :key="index"
               class="tag is-dark"
             >
@@ -55,7 +60,7 @@
                   v-for="(categoryLabel, index) in CategoryList"
                   :key="index"
                   :value="categoryLabel"
-                  :disabled="isCategoryInComick(categoryLabel, comick.category)"
+                  :disabled="isCategoryInComick(categoryLabel, Comick.category)"
                 >
                   {{ categoryLabel }}
                 </option>
@@ -95,6 +100,7 @@
 
 <script>
 import CategoryList from '@/api/CategoryService'
+import { mapState } from 'vuex'
 
 export default {
   name: 'ComickEdit',
@@ -106,16 +112,19 @@ export default {
     }
   },
   computed: {
-    comick() {
-      return this.$store.state.comick.comick
-    }
+    ...mapState({
+      Comick: state => state.comick.comick
+    })
   },
   mounted() {
     this.CategoryList = CategoryList.category
   },
   methods: {
+    updateTitle(e) {
+      this.$store.dispatch('comick/updateTitle', e.target.value)
+    },
     addCategory(newCategory) {
-      this.comick.category.push(newCategory)
+      this.$store.dispatch('comick/addCategory', newCategory)
       this.selectCategory = null
     },
     deleteCategory(deleteThisCategory, itemList) {
@@ -127,11 +136,9 @@ export default {
         if (itemList[index] !== deleteThisCategory) {
           index++
         } else {
-          itemList.splice(index, 1)
-          index = itemList.length
+          this.$store.dispatch('comick/deleteCategory', index)
         }
       }
-      return itemList
     },
     isCategoryInComick(newItem, itemList) {
       let matched = false
