@@ -14,14 +14,7 @@ export default {
   },
 
   updateComickInBD(params) {
-    if (sessionStorage.getItem(params)) {
-      const comick = JSON.parse(sessionStorage.getItem(params))
-      return Api().put('comicks/' + params, comick)
-    } else {
-      /* eslint-disable no-console */
-      console.log('no existe en local host el comick' + params)
-      /* eslint-enable no-console */
-    }
+    return Api().put('comicks/' + params._id, params)
   },
 
   getComick(params) {

@@ -64,7 +64,7 @@ export default {
       this.$store.dispatch('comick/setComick', this.$route.params.id)
     },
     async updateComick() {
-      await ComicksService.updateComickInBD(this.$route.params.id)
+      await ComicksService.updateComickInBD(this.Comick)
     },
     async addCuadro() {}
   }
