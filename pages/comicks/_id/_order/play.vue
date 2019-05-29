@@ -30,11 +30,11 @@ export default {
   },
   computed: {
     ...mapState({
-      comickId: state => state.comick.comick.id
-    }),
-    thisCuadro() {
-      return this.store.getters.comick.getCuadro(0)
-    }
+      comickId: state => state.comick.comick.id,
+      thisCuadro: function(state) {
+        return state.comick.comick.cuadros[this.cuadroIndex]
+      }
+    })
   },
   methods: {
     getCuadro() {}

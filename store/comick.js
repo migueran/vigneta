@@ -57,12 +57,4 @@ export const mutations = {
   }
 }
 
-export const getters = {
-  getComick(state) {
-    return state.comick
-  },
-  getCuadro(state, index) {
-    alert(index)
-    return state.cuadros[index]
-  }
-}
+export const getters = {}
