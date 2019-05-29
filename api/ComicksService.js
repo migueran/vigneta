@@ -28,11 +28,6 @@ export default {
     return Api().get('comicks/' + params.id)
   },
 
-  saveComickInSessionStorage(comick) {
-    const thisComickId = comick._id
-    sessionStorage.setItem(thisComickId, JSON.stringify(comick))
-  },
-
   deleteComick(id) {
     return Api().delete('comicks/' + id)
   }

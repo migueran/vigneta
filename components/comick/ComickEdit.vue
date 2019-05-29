@@ -127,11 +127,9 @@ export default {
       this.$store.dispatch('comick/addCategory', newCategory)
       this.selectCategory = null
     },
-    deleteCategory(deleteThisCategory, itemList) {
+    deleteCategory(deleteThisCategory) {
       let index = 0
-      if (itemList === undefined) {
-        itemList = this.comick.category
-      }
+      const itemList = this.Comick.category
       while (index < itemList.length) {
         if (itemList[index] !== deleteThisCategory) {
           index++

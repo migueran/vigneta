@@ -1,8 +1,37 @@
+import ComicksService from '~/api/ComicksService'
+
 export const state = () => ({
   comick: {
     cuadros: []
   }
 })
+
+export const actions = {
+  async setComick({ commit }, comickId) {
+    const response = await ComicksService.getComick({
+      id: comickId
+    })
+    commit('SET_COMICK', response.data)
+  },
+  updateTitle({ commit }, value) {
+    commit('UPDATE_TITLE', value)
+  },
+  addCategory({ commit }, newCategory) {
+    commit('ADD_CATEGORY', newCategory)
+  },
+  deleteCategory({ commit }, index) {
+    commit('DELETE_CATEGORY', index)
+  },
+  addCuadro({ commit }, indexCuadro, newCuadro) {
+    commit('ADD_CUADRO', indexCuadro)
+  },
+  deleteCuadro({ commit }, index) {
+    commit('DELETE_CUADRO', index)
+  },
+  duplicateCuadro({ commit }, indexCuadro, newCuadro) {
+    commit('DUPLICATE_CUADRO', indexCuadro)
+  }
+}
 
 export const mutations = {
   SET_COMICK(state, comick) {
@@ -28,32 +57,12 @@ export const mutations = {
   }
 }
 
-export const actions = {
-  setComick({ commit }, comick) {
-    commit('SET_COMICK', comick)
-  },
-  updateTitle({ commit }, value) {
-    commit('UPDATE_TITLE', value)
-  },
-  addCategory({ commit }, newCategory) {
-    commit('ADD_CATEGORY', newCategory)
-  },
-  deleteCategory({ commit }, index) {
-    commit('DELETE_CATEGORY', index)
-  },
-  addCuadro({ commit }, indexCuadro, newCuadro) {
-    commit('ADD_CUADRO', indexCuadro)
-  },
-  deleteCuadro({ commit }, index) {
-    commit('DELETE_CUADRO', index)
-  },
-  duplicateCuadro({ commit }, indexCuadro, newCuadro) {
-    commit('DUPLICATE_CUADRO', indexCuadro)
-  }
-}
-
 export const getters = {
   getComick(state) {
     return state.comick
+  },
+  getCuadro(state, index) {
+    alert(index)
+    return state.cuadros[index]
   }
 }
