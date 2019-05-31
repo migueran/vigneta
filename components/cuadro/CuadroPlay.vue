@@ -1,18 +1,24 @@
 <template>
   <main id="Cuadro" class="cuadro">
-    <div v-for="(elem, index) in thisCuadro.elem" :key="index">
+    <div
+      v-for="(elem, index) in thisCuadro.elem"
+      :key="index"
+      style="position: absolute; width: 100%; height: 100%"
+    >
       <div
         :class="elem.typeElem"
         :style="'z-index:' + elem.zIndex + ';' + elem.style"
       >
-        <span :style="elem.spanStyleToTxtBkg">
-          <span class="content">{{ elem.txt }}</span>
-          <img v-if="elem.typeElem != 'txt'" src="~assets/00002txt01.png" />
+        <span>
+          <span class="content" :style="elem.spanStyleToTxtBkg">
+            {{ elem.txt }}
+          </span>
+          <img v-if="elem.typeElem != 'txt'" :src="getImgUrl(elem.bkg)" />
         </span>
       </div>
     </div>
     <figure class="bkg">
-      <img src="~assets/00002.png" />
+      <img :src="getImgUrl(thisCuadro.bkgCuadro)" />
     </figure>
   </main>
 </template>
@@ -24,7 +30,10 @@ export default {
     thisCuadro: {
       type: Object,
       default: function() {
-        return { elem: 'hello' }
+        return {
+          elem:
+            '{"elem":[{"transition":{"enter":null,"leave":null},"zIndex":1,"_id":"5c45e02756ba760c1a26b192","typeElem":"txt":"texto","style":"",}],"_id":"5c45e02756ba760c1a26b193","bkgCuadro":""}'
+        }
       }
     },
     thisCuadroIndex: {
@@ -34,20 +43,31 @@ export default {
     thisComickId: {
       type: Number,
       default: 0
+    },
+    assets: {
+      type: String,
+      default: ''
     }
   },
-  methods: {}
+  methods: {
+    getImgUrl(value) {
+      return this.assets + value
+    }
+  }
 }
 </script>
 
 <style lang="sass">
+.cuadro
+  position: relative
+  background-color: #eaeaea
+  box-shadow: 3px 3px 15px #000
+  border: #eaeaea solid 15px
 figure.bkg
-  position: absolute
   top: 0
   left: 0
   width: 100%
   height: auto
-  z-index: 0
 .cuadro
   opacity: 1
   max-height: 5000px
@@ -63,6 +83,8 @@ figure.bkg
   position: absolute
   background-repeat: no-repeat
   span.content
+    position: absolute
+    width: 100%
     top: 0
     left: 0
 .txt, .txt-bkg
