@@ -236,7 +236,7 @@ export default {
 <style lang="sass">
 #CuadroCRUD
   position: absolute
-  z-index: 99
+  z-index: 20
   top: 5%
   right: 5%
 .modal-content
