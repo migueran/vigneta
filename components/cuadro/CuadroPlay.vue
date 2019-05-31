@@ -24,23 +24,12 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'CuadroPlay',
   props: {
-    thisCuadro: {
-      type: Object,
-      default: function() {
-        return {
-          elem:
-            '{"elem":[{"transition":{"enter":null,"leave":null},"zIndex":1,"_id":"5c45e02756ba760c1a26b192","typeElem":"txt":"texto","style":"",}],"_id":"5c45e02756ba760c1a26b193","bkgCuadro":""}'
-        }
-      }
-    },
     thisCuadroIndex: {
-      type: Number,
-      default: 0
-    },
-    thisComickId: {
       type: Number,
       default: 0
     },
@@ -48,6 +37,13 @@ export default {
       type: String,
       default: ''
     }
+  },
+  computed: {
+    ...mapState({
+      thisCuadro: function(state) {
+        return state.comick.comick.cuadros[this.thisCuadroIndex]
+      }
+    })
   },
   methods: {
     getImgUrl(value) {

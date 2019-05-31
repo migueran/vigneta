@@ -3,12 +3,10 @@
     <headBar />
     <section class="section">
       <cuadroPlay
-        :this-cuadro="thisCuadro"
         :this-cuadro-index="cuadroIndex"
-        :this-comick-id="comickId"
         :assets="assets"
       />
-      <cuadroCRUD v-if="edit" :this-cuadro="thisCuadro" />
+      <cuadroCRUD v-if="edit" :this-cuadro-index="cuadroIndex" />
     </section>
   </div>
 </template>

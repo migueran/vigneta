@@ -55,13 +55,6 @@
             </div>
           </div>
         </div>
-        <footer class="card-footer">
-          <a class="card-footer-item" @click="editElement(elem)">Edit elem</a>
-          <a class="card-footer-item" @click="delElement(elem)">del elem</a>
-          <a class="card-footer-item" @click="duplicateElement(elem)">
-            duplicate elem
-          </a>
-        </footer>
       </div>
     </div>
     <div
@@ -79,6 +72,26 @@
               <strong>{{ thisCuadroIndexDisplay }}</strong>
             </p>
           </span>
+          <a
+            href="#"
+            class="card-header-icon"
+            aria-label="more options"
+            @click="duplicateElement(elem._id + index)"
+          >
+            <span class="icon">
+              <i class="far fa-clone" aria-hidden="true" />
+            </span>
+          </a>
+          <a
+            href="#"
+            class="card-header-icon"
+            aria-label="more options"
+            @click="delElement(elem._id + index)"
+          >
+            <span class="icon">
+              <i class="far fa-trash-alt" aria-hidden="true" />
+            </span>
+          </a>
           <a
             href="#"
             class="card-header-icon"
@@ -190,11 +203,13 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="modal-content">
+      <div class="card">
         <footer class="card-footer">
-          <a class="card-footer-item" @click="editElement(elem)">Edit elem</a>
-          <a class="card-footer-item" @click="delElement(elem)">del elem</a>
-          <a class="card-footer-item" @click="duplicateElement(elem)">
-            duplicate elem
+          <a class="card-footer-item" @click="saveCuadroInBD(elem)">
+            save
           </a>
         </footer>
       </div>
@@ -203,21 +218,11 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import elemListToEdit from '~/api/ComickToEditService'
 
 export default {
   name: 'CuadroCRUD',
-  props: {
-    thisCuadro: {
-      type: Object,
-      default: function() {
-        return {
-          elem:
-            '{"elem":[{"transition":{"enter":null,"leave":null},"zIndex":1,"_id":"5c45e02756ba760c1a26b192","typeElem":"txt":"texto","style":"",}],"_id":"5c45e02756ba760c1a26b193","bkgCuadro":""}'
-        }
-      }
-    }
-  },
   data() {
     return {
       typeElemList: elemListToEdit.elemType,
@@ -225,9 +230,31 @@ export default {
       thisActive: false
     }
   },
+  props: {
+    thisCuadroIndex: {
+      type: Number,
+      default: 0
+    }
+  },
+  computed: {
+    ...mapState({
+      thisCuadro: function(state) {
+        return state.comick.comick.cuadros[this.thisCuadroIndex]
+      }
+    })
+  },
   methods: {
     thisShow(id) {
       document.getElementById(id).classList.toggle('active')
+    },
+    delElement(elem) {
+      alert(elem)
+    },
+    duplicateElement(elem) {
+      alert(elem)
+    },
+    saveCuadroInBD(elem) {
+      alert(elem)
     }
   }
 }
@@ -241,11 +268,12 @@ export default {
   right: 5%
 .modal-content
   overflow: hidden
-.card-content, .card-content ~ .card-footer
+.card-content
   max-height: 0px
   padding-top: 0
   padding-bottom: 0
-.card-content.active, .card-content.active ~ .card-footer
+  overflow: hidden
+.card-content.active
   max-height: 1000px
   padding-top: 1.5rem
   padding-bottom: 1.5rem
