@@ -8,14 +8,19 @@
               :value="Comick.title"
               type="text"
               class="input"
-              @input="updateTitle"
+              @input="updateComick('title', $event.target.value)"
             />
           </p>
         </div>
         <div class="field level is-narrow column is-2">
           <p class="control">
             draft:
-            <input :value="Comick.draft" class="checkbox" type="checkbox" />
+            <input
+              :value="Comick.draft"
+              class="checkbox"
+              type="checkbox"
+              @input="updateComick('draft', $event.target.checked)"
+            />
           </p>
         </div>
       </div>
@@ -29,6 +34,7 @@
               class="textarea"
               rows="1"
               cols="32"
+              @input="updateComick('description', $event.target.value)"
             ></textarea>
           </div>
         </div>
@@ -120,8 +126,11 @@ export default {
     this.CategoryList = CategoryList.category
   },
   methods: {
-    updateTitle(e) {
-      this.$store.dispatch('comick/updateTitle', e.target.value)
+    updateComick(key, value) {
+      this.$store.dispatch('comick/updateComick1Prop', {
+        key: key,
+        value: value
+      })
     },
     addCategory(newCategory) {
       this.$store.dispatch('comick/addCategory', newCategory)

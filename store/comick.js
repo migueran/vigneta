@@ -13,8 +13,8 @@ export const actions = {
     })
     commit('SET_COMICK', response.data)
   },
-  updateTitle({ commit }, value) {
-    commit('UPDATE_TITLE', value)
+  updateComick1Prop({ commit }, keyValue) {
+    commit('UPDATE_COMICK_1PROP', keyValue)
   },
   addCategory({ commit }, newCategory) {
     commit('ADD_CATEGORY', newCategory)
@@ -37,8 +37,12 @@ export const mutations = {
   SET_COMICK(state, comick) {
     state.comick = comick
   },
-  UPDATE_TITLE(state, value) {
-    state.comick.title = value
+  UPDATE_COMICK_1PROP(state, keyValue) {
+    /* eslint no-console: */
+    console.log(keyValue.key)
+    /* eslint no-console: */
+    console.log(keyValue.value)
+    state.comick[keyValue.key] = keyValue.value
   },
   ADD_CATEGORY(state, newCategory) {
     state.comick.category.push(newCategory)
