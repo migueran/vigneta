@@ -16,6 +16,12 @@ export const actions = {
   updateComick1Prop({ commit }, keyValue) {
     commit('UPDATE_COMICK_1PROP', keyValue)
   },
+  updateCuadro1Prop({ commit }, keyValue) {
+    commit('UPDATE_CUADRO_1PROP', keyValue)
+  },
+  updateElem1Prop({ commit }, keyValue) {
+    commit('UPDATE_ELEM_1PROP', keyValue)
+  },
   addCategory({ commit }, newCategory) {
     commit('ADD_CATEGORY', newCategory)
   },
@@ -38,11 +44,14 @@ export const mutations = {
     state.comick = comick
   },
   UPDATE_COMICK_1PROP(state, keyValue) {
-    /* eslint no-console: */
-    console.log(keyValue.key)
-    /* eslint no-console: */
-    console.log(keyValue.value)
     state.comick[keyValue.key] = keyValue.value
+  },
+  UPDATE_CUADRO_1PROP(state, keyValue) {
+    state.comick.cuadros[keyValue.order][keyValue.key] = keyValue.value
+  },
+  UPDATE_ELEM_1PROP(state, keyValue) {
+    state.comick.cuadros[keyValue.order].elem[keyValue.order][keyValue.key] =
+      keyValue.value
   },
   ADD_CATEGORY(state, newCategory) {
     state.comick.category.push(newCategory)

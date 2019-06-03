@@ -2,10 +2,7 @@
   <div class="container">
     <headBar />
     <section class="section">
-      <cuadroPlay
-        :this-cuadro-index="cuadroIndex"
-        :assets="assets"
-      />
+      <cuadroPlay :this-cuadro-index="cuadroIndex" :assets="assets" />
       <cuadroCRUD v-if="edit" :this-cuadro-index="cuadroIndex" />
     </section>
   </div>

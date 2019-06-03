@@ -26,9 +26,10 @@
                 <label class="label is-small">bkg</label>
                 <p class="control">
                   <input
-                    v-model="thisCuadro.bkgCuadro"
+                    :value="thisCuadro.bkgCuadro"
                     class="input"
                     type="text"
+                    @input="updateCuadro('bkgCuadro', $event.target.value)"
                   />
                 </p>
               </div>
@@ -38,6 +39,14 @@
             <div class="field-label is-normal level-left">
               <label class="label">style</label>
             </div>
+            <p class="control">
+              <input
+                :value="thisCuadro.style"
+                class="input"
+                type="text"
+                @input="updateCuadro('style', $event.target.value)"
+              />
+            </p>
             <div
               v-for="(tag, indexi) in styleToElem"
               :key="indexi"
@@ -111,7 +120,12 @@
                   <label class="label is-small">typeElem</label>
                   <p class="control is-expanded has-icons-left">
                     <span class="select is-fullwidth" name="category">
-                      <select v-model="selectType">
+                      <select
+                        :value="elem.typeElem"
+                        @input="
+                          updateElem(index, 'typeElem', $event.target.value)
+                        "
+                      >
                         <option
                           v-for="(elemTypeLabel, indexo) in typeElemList"
                           :key="indexo"
@@ -129,35 +143,65 @@
                 <div class="field">
                   <label class="label is-small">zIndex</label>
                   <p class="control">
-                    <input v-model="elem.zIndex" class="input" type="text" />
+                    <input
+                      :value="elem.zIndex"
+                      class="input"
+                      type="text"
+                      @input="updateElem(index, 'zIndex', $event.target.value)"
+                    />
                   </p>
                 </div>
               </div>
             </div>
-            <div class="field-body">
+            <div
+              v-if="elem.typeElem === 'txt' || elem.typeElem === 'txt-bkg'"
+              class="field-body"
+            >
               <div class="field">
                 <label class="label is-small">txt</label>
                 <p class="control">
-                  <input v-model="elem.txt" class="input" type="text" />
+                  <input
+                    :value="elem.txt"
+                    class="input"
+                    type="text"
+                    @input="updateElem(index, 'txt', $event.target.value)"
+                  />
                 </p>
               </div>
             </div>
-            <div class="field-body">
+            <div
+              v-if="
+                elem.typeElem === 'character' || elem.typeElem === 'txt-bkg'
+              "
+              class="field-body"
+            >
               <div class="field">
                 <label class="label is-small">bkg</label>
                 <p class="control">
-                  <input v-model="elem.bkg" class="input" type="text" />
+                  <input
+                    :value="elem.bkg"
+                    class="input"
+                    type="text"
+                    @input="updateElem(index, 'bkg', $event.target.value)"
+                  />
                 </p>
               </div>
             </div>
-            <div class="field-body">
+            <div v-if="elem.typeElem === 'txt-bkg'" class="field-body">
               <div class="field">
                 <label class="label is-small">spanStyleToTxtBkg</label>
                 <p class="control">
                   <input
-                    v-model="elem.spanStyleToTxtBkg"
+                    :value="elem.spanStyleToTxtBkg"
                     class="input"
                     type="text"
+                    @input="
+                      updateElem(
+                        index,
+                        'spanStyleToTxtBkg',
+                        $event.target.value
+                      )
+                    "
                   />
                 </p>
               </div>
@@ -166,6 +210,14 @@
               <div class="field-label is-normal level-left">
                 <label class="label">style</label>
               </div>
+              <p class="control">
+                <input
+                  :value="elem.style"
+                  class="input"
+                  type="text"
+                  @input="updateElem(index, 'style', $event.target.value)"
+                />
+              </p>
               <div
                 v-for="(tag, indexi) in styleToElem"
                 :key="indexi"
@@ -190,13 +242,35 @@
                 <div class="field">
                   <label class="label is-small">enter</label>
                   <p class="control">
-                    <input class="input" type="text" />
+                    <input
+                      :value="elem.transition.enter"
+                      class="input"
+                      type="text"
+                      @input="
+                        updateElem(
+                          index,
+                          'transition.enter',
+                          $event.target.value
+                        )
+                      "
+                    />
                   </p>
                 </div>
                 <div class="field">
                   <label class="label is-small">leave</label>
                   <p class="control">
-                    <input class="input" type="text" />
+                    <input
+                      :value="elem.transition.leave"
+                      class="input"
+                      type="text"
+                      @input="
+                        updateElem(
+                          index,
+                          'transition.leave',
+                          $event.target.value
+                        )
+                      "
+                    />
                   </p>
                 </div>
               </div>
@@ -223,17 +297,17 @@ import elemListToEdit from '~/api/ComickToEditService'
 
 export default {
   name: 'CuadroCRUD',
+  props: {
+    thisCuadroIndex: {
+      type: Number,
+      default: 0
+    }
+  },
   data() {
     return {
       typeElemList: elemListToEdit.elemType,
       thisCuadroIndexDisplay: parseInt(this.$route.params.order) + 1,
       thisActive: false
-    }
-  },
-  props: {
-    thisCuadroIndex: {
-      type: Number,
-      default: 0
     }
   },
   computed: {
@@ -246,6 +320,22 @@ export default {
   methods: {
     thisShow(id) {
       document.getElementById(id).classList.toggle('active')
+    },
+    updateCuadro(key, value) {
+      this.$store.dispatch('comick/updateCuadro1Prop', {
+        order: this.thisCuadroIndex,
+        key: key,
+        value: value
+      })
+    },
+    updateElem(index, key, value) {
+      alert(index + ', ' + key + ', ' + value)
+      this.$store.dispatch('comick/updateElem1Prop', {
+        order: this.thisCuadroIndex,
+        index: index,
+        key: key,
+        value: value
+      })
     },
     delElement(elem) {
       alert(elem)
