@@ -85,7 +85,7 @@
             href="#"
             class="card-header-icon"
             aria-label="more options"
-            @click="duplicateElement(elem._id + index)"
+            @click="duplicateElement(index, elem)"
           >
             <span class="icon">
               <i class="far fa-clone" aria-hidden="true" />
@@ -95,7 +95,7 @@
             href="#"
             class="card-header-icon"
             aria-label="more options"
-            @click="delElement(elem._id + index)"
+            @click="delElement(index)"
           >
             <span class="icon">
               <i class="far fa-trash-alt" aria-hidden="true" />
@@ -329,7 +329,6 @@ export default {
       })
     },
     updateElem(index, key, value) {
-      alert(index + ', ' + key + ', ' + value)
       this.$store.dispatch('comick/updateElem1Prop', {
         order: this.thisCuadroIndex,
         index: index,
@@ -337,11 +336,15 @@ export default {
         value: value
       })
     },
-    delElement(elem) {
-      alert(elem)
+    delElement(index) {
+      this.$store.dispatch('comick/deleteElem', this.thisCuadroIndex, index)
     },
-    duplicateElement(elem) {
-      alert(elem)
+    duplicateElement(index, elem) {
+      this.$store.dispatch('comick/duplicateElem', {
+        order: this.thisCuadroIndex,
+        index: index,
+        newElem: elem
+      })
     },
     saveCuadroInBD(elem) {
       alert(elem)

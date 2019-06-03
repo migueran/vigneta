@@ -97,14 +97,20 @@ export default {
           spanStyleToTxtBkg: ''
         }
       }
-      this.$store.dispatch('comick/addCuadro', indexCuadro, newCuadro)
+      this.$store.dispatch('comick/addCuadro', {
+        indexCuadro: indexCuadro,
+        newCuadro: newCuadro
+      })
     },
     deleteCuadro(index) {
       this.$store.dispatch('comick/deleteCuadro', index)
     },
     duplicateCuadro(indexCuadro, newCuadro) {
       indexCuadro += 1
-      this.$store.dispatch('comick/duplicateCuadro', indexCuadro, newCuadro)
+      this.$store.dispatch('comick/duplicateCuadro', {
+        indexCuadro: indexCuadro,
+        newCuadro: newCuadro
+      })
     }
   }
 }
