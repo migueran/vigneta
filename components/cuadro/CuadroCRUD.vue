@@ -306,6 +306,7 @@ export default {
   data() {
     return {
       typeElemList: elemListToEdit.elemType,
+      styleToElem: elemListToEdit.styleElem,
       thisCuadroIndexDisplay: parseInt(this.$route.params.order) + 1,
       thisActive: false
     }
