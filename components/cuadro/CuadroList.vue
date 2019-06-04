@@ -107,6 +107,7 @@ export default {
     },
     duplicateCuadro(indexCuadro, newCuadro) {
       indexCuadro += 1
+      delete newCuadro._id
       this.$store.dispatch('comick/duplicateCuadro', {
         indexCuadro: indexCuadro,
         newCuadro: newCuadro

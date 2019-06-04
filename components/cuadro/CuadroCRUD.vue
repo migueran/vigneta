@@ -21,9 +21,11 @@
         </header>
         <div :id="'cuadro' + thisCuadro._id" class="card-content">
           <div :id="'formCuadro' + thisCuadro._id">
-            <div class="field-body">
+            <div class="field is-horizontal">
+              <div class="field-label is-normal level-left">
+                <label class="label">bkg</label>
+              </div>
               <div class="field">
-                <label class="label is-small">bkg</label>
                 <p class="control">
                   <input
                     :value="thisCuadro.bkgCuadro"
@@ -36,28 +38,32 @@
             </div>
           </div>
           <div class="field is-horizontal">
-            <div class="field-label is-normal level-left">
-              <label class="label">style</label>
+            <div class="field-body">
+              <div class="field-label is-normal">
+                <label class="label">style</label>
+              </div>
+              <div class="field">
+                <p class="control">
+                  <input
+                    :value="thisCuadro.style"
+                    class="input"
+                    type="text"
+                    @input="updateCuadro('style', $event.target.value)"
+                  />
+                </p>
+              </div>
             </div>
-            <p class="control">
-              <input
-                :value="thisCuadro.style"
-                class="input"
-                type="text"
-                @input="updateCuadro('style', $event.target.value)"
-              />
-            </p>
             <div
               v-for="(tag, indexi) in styleToElem"
               :key="indexi"
               class="field-body"
             >
-              <div class="field">
+              <div class="field-label is-normal">
                 <label class="label is-small">{{ tag.tag }}</label>
-                <p class="control">
-                  <input class="input" type="text" :value="tag.value" />
-                </p>
               </div>
+              <p class="control">
+                <input class="input" type="text" :value="tag.value" />
+              </p>
               <div class="field-label is-normal level-right">
                 <label class="label">{{ tag.unity }}</label>
               </div>
@@ -115,68 +121,76 @@
         <div :id="elem._id + index" class="card-content">
           <div :id="'formCuadro' + elem._id">
             <div class="field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">typeElem</label>
+              </div>
+              <div class="field-body">
+                <p class="control has-icons-left">
+                  <span class="select is-expanded" name="category">
+                    <select
+                      :value="elem.typeElem"
+                      @input="
+                        updateElem(index, 'typeElem', $event.target.value)
+                      "
+                    >
+                      <option
+                        v-for="(elemTypeLabel, indexo) in typeElemList"
+                        :key="indexo"
+                        :value="elemTypeLabel"
+                      >
+                        {{ elemTypeLabel }}
+                      </option>
+                    </select>
+                  </span>
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-hashtag" />
+                  </span>
+                </p>
+              </div>
+              <div class="field-label is-normal">
+                <label class="label">zIndex</label>
+              </div>
+              <div class="field-body">
+                <p class="control">
+                  <input
+                    :value="elem.zIndex"
+                    class="input"
+                    type="text"
+                    @input="updateElem(index, 'zIndex', $event.target.value)"
+                  />
+                </p>
+              </div>
+            </div>
+            <div
+              v-if="elem.typeElem === 'txt' || elem.typeElem === 'txt-bkg'"
+              class="field is-horizontal"
+            >
+              <div class="field-label is-normal">
+                <label class="label">txt</label>
+              </div>
               <div class="field-body">
                 <div class="field">
-                  <label class="label is-small">typeElem</label>
-                  <p class="control is-expanded has-icons-left">
-                    <span class="select is-fullwidth" name="category">
-                      <select
-                        :value="elem.typeElem"
-                        @input="
-                          updateElem(index, 'typeElem', $event.target.value)
-                        "
-                      >
-                        <option
-                          v-for="(elemTypeLabel, indexo) in typeElemList"
-                          :key="indexo"
-                          :value="elemTypeLabel"
-                        >
-                          {{ elemTypeLabel }}
-                        </option>
-                      </select>
-                    </span>
-                    <span class="icon is-small is-left">
-                      <i class="fas fa-globe" />
-                    </span>
-                  </p>
-                </div>
-                <div class="field">
-                  <label class="label is-small">zIndex</label>
                   <p class="control">
-                    <input
-                      :value="elem.zIndex"
+                    <textarea
+                      :value="elem.txt"
                       class="input"
-                      type="text"
-                      @input="updateElem(index, 'zIndex', $event.target.value)"
+                      type="textarea"
+                      @input="updateElem(index, 'txt', $event.target.value)"
                     />
                   </p>
                 </div>
               </div>
             </div>
             <div
-              v-if="elem.typeElem === 'txt' || elem.typeElem === 'txt-bkg'"
-              class="field-body"
-            >
-              <div class="field">
-                <label class="label is-small">txt</label>
-                <p class="control">
-                  <input
-                    :value="elem.txt"
-                    class="input"
-                    type="text"
-                    @input="updateElem(index, 'txt', $event.target.value)"
-                  />
-                </p>
-              </div>
-            </div>
-            <div
               v-if="
                 elem.typeElem === 'character' || elem.typeElem === 'txt-bkg'
               "
-              class="field-body"
+              class="field is-horizontal"
             >
-              <div class="field">
+              <div class="field-label is-normal">
                 <label class="label is-small">bkg</label>
+              </div>
+              <div class="field-body">
                 <p class="control">
                   <input
                     :value="elem.bkg"
@@ -187,9 +201,11 @@
                 </p>
               </div>
             </div>
-            <div v-if="elem.typeElem === 'txt-bkg'" class="field-body">
-              <div class="field">
+            <div v-if="elem.typeElem === 'txt-bkg'" class="field is-horizontal">
+              <div class="field-label is-normal">
                 <label class="label is-small">spanStyleToTxtBkg</label>
+              </div>
+              <div class="field-body">
                 <p class="control">
                   <input
                     :value="elem.spanStyleToTxtBkg"
@@ -207,24 +223,30 @@
               </div>
             </div>
             <div class="field is-horizontal">
-              <div class="field-label is-normal level-left">
+              <div class="field-label is-normal">
                 <label class="label">style</label>
               </div>
-              <p class="control">
-                <input
-                  :value="elem.style"
-                  class="input"
-                  type="text"
-                  @input="updateElem(index, 'style', $event.target.value)"
-                />
-              </p>
+              <div class="field-body">
+                <p class="control">
+                  <input
+                    :value="elem.style"
+                    class="input"
+                    type="text"
+                    @input="updateElem(index, 'style', $event.target.value)"
+                  />
+                </p>
+              </div>
+            </div>
+            <div class="field is-horizontal">
               <div
                 v-for="(tag, indexi) in styleToElem"
                 :key="indexi"
                 class="field-body"
               >
-                <div class="field">
+                <div class="field-label">
                   <label class="label is-small">{{ tag.tag }}</label>
+                </div>
+                <div class="field-body">
                   <p class="control">
                     <input class="input" type="text" :value="tag.value" />
                   </p>
@@ -235,12 +257,14 @@
               </div>
             </div>
             <div class="field is-horizontal">
-              <div class="field-label is-normal level-left">
+              <div class="field-label is-normal">
                 <label class="label">transition</label>
               </div>
               <div class="field-body">
-                <div class="field">
-                  <label class="label is-small">enter</label>
+                <div class="field-label is-small">
+                  <label class="label">enter</label>
+                </div>
+                <div class="field-body">
                   <p class="control">
                     <input
                       :value="elem.transition.enter"
@@ -256,8 +280,10 @@
                     />
                   </p>
                 </div>
-                <div class="field">
-                  <label class="label is-small">leave</label>
+                <div class="field-label is-small">
+                  <label class="label">leave</label>
+                </div>
+                <div class="field-body">
                   <p class="control">
                     <input
                       :value="elem.transition.leave"
@@ -294,6 +320,7 @@
 <script>
 import { mapState } from 'vuex'
 import elemListToEdit from '~/api/ComickToEditService'
+import ComicksService from '~/api/ComicksService'
 
 export default {
   name: 'CuadroCRUD',
@@ -341,14 +368,16 @@ export default {
       this.$store.dispatch('comick/deleteElem', this.thisCuadroIndex, index)
     },
     duplicateElement(index, elem) {
+      delete elem._id
       this.$store.dispatch('comick/duplicateElem', {
         order: this.thisCuadroIndex,
         index: index,
         newElem: elem
       })
     },
-    saveCuadroInBD(elem) {
-      alert(elem)
+    async saveCuadroInBD() {
+      const Comick = this.$store.state.comick.comick
+      await ComicksService.updateComickInBD(Comick)
     }
   }
 }
