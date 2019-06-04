@@ -27,8 +27,8 @@ export default {
     return {
       edit: false,
       assets: 'http://localhost:8081/assets/',
-      cuadroIndex: this.$route.params.order,
-      cuadroIndexDisplay: parseInt(this.$route.params.order) + 1
+      cuadroIndex: parseInt(this.$route.params.order),
+      cuadroIndexDisplay: this.$route.params.order + 1
     }
   },
   computed: {
