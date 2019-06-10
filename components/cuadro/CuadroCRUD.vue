@@ -43,30 +43,53 @@
                 <label class="label">style</label>
               </div>
               <div class="field">
-                <p class="control">
-                  <input
-                    :value="thisCuadro.style"
-                    class="input"
-                    type="text"
-                    @input="updateCuadro('style', $event.target.value)"
-                  />
-                </p>
+                <div
+                  v-for="(style, indexi) in thisCuadro.style"
+                  :key="indexi"
+                  class="field-body"
+                >
+                  <div class="field-label is-normal">
+                    <label class="label is-small">{{ style.tag }}</label>
+                  </div>
+                  <p class="control">
+                    <input class="input" type="text" :value="style.value" />
+                  </p>
+                  <div class="field-label is-normal level-right">
+                    <label class="label">{{ style.unity }}</label>
+                  </div>
+                </div>
               </div>
             </div>
-            <div
-              v-for="(tag, indexi) in styleToElem"
-              :key="indexi"
-              class="field-body"
-            >
-              <div class="field-label is-normal">
-                <label class="label is-small">{{ tag.tag }}</label>
-              </div>
+            <div class="field-label is-normal">
+              <label class="label">add style</label>
+            </div>
+            <div class="field">
+              <select @input="updateElem(index, 'Style', $event.target.value)">
+                <option disabled value="">Please select one</option>
+                <option
+                  v-for="(styleTag, indexS) in styleToElem"
+                  :key="indexS"
+                  :value="elemTypeLabel"
+                >
+                  {{ styleTag }}
+                </option>
+              </select>
+            </div>
+            <div class="field">
               <p class="control">
-                <input class="input" type="text" :value="tag.value" />
+                <input class="input" type="Number" value="" />
               </p>
-              <div class="field-label is-normal level-right">
-                <label class="label">{{ tag.unity }}</label>
-              </div>
+            </div>
+            <div class="field">
+              <select @input="updateElem(index, 'Style', $event.target.value)">
+                <option disabled value="">Please select one</option>
+                <option>
+                  %
+                </option>
+                <option>
+                  px
+                </option>
+              </select>
             </div>
           </div>
         </div>
@@ -223,36 +246,59 @@
               </div>
             </div>
             <div class="field is-horizontal">
-              <div class="field-label is-normal">
-                <label class="label">style</label>
-              </div>
-              <div class="field-body">
-                <p class="control">
-                  <input
-                    :value="elem.style"
-                    class="input"
-                    type="text"
-                    @input="updateElem(index, 'style', $event.target.value)"
-                  />
-                </p>
-              </div>
-            </div>
-            <div class="field is-horizontal">
-              <div
-                v-for="(tag, indexi) in styleToElem"
-                :key="indexi"
-                class="field-body"
-              >
-                <div class="field-label">
-                  <label class="label is-small">{{ tag.tag }}</label>
+              <div class="field">
+                <div class="field-label is-normal">
+                  <label class="label">style</label>
                 </div>
-                <div class="field-body">
+                <div
+                  v-for="(style, indexi) in thisCuadro.style"
+                  :key="indexi"
+                  class="field-body"
+                >
+                  <div class="field-label is-normal">
+                    <label class="label is-small">{{ style.tag }}</label>
+                  </div>
                   <p class="control">
-                    <input class="input" type="text" :value="tag.value" />
+                    <input class="input" type="text" :value="style.value" />
+                  </p>
+                  <div class="field-label is-normal level-right">
+                    <label class="label">{{ style.unity }}</label>
+                  </div>
+                </div>
+                <div class="field-label is-normal">
+                  <label class="label">add style</label>
+                </div>
+                <div class="field">
+                  <select
+                    @input="updateElem(index, 'Style', $event.target.value)"
+                  >
+                    <option disabled value="">Please select one</option>
+                    <option
+                      v-for="(styleTag, indexE) in styleToElem"
+                      :key="indexE"
+                      :value="elemTypeLabel"
+                    >
+                      {{ styleTag }}
+                    </option>
+                  </select>
+                </div>
+                <div class="field">
+                  <p class="control">
+                    <input class="input" type="Number" value="" />
                   </p>
                 </div>
-                <div class="field-label is-normal level-right">
-                  <label class="label">{{ tag.unity }}</label>
+                <div class="field">
+                  <select
+                    @input="updateElem(index, 'Style', $event.target.value)"
+                  >
+                    <option disabled value="">Please select one</option>
+                    <option>
+                      %
+                    </option>
+                    <option>
+                      px
+                    </option>
+                  </select>
                 </div>
               </div>
             </div>

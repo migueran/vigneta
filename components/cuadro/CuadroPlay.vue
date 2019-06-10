@@ -5,10 +5,7 @@
       :key="index"
       style="position: absolute; width: 100%; height: 100%"
     >
-      <div
-        :class="elem.typeElem"
-        :style="'z-index:' + elem.zIndex + ';' + elem.style"
-      >
+      <div :class="elem.typeElem" :style="elem.style | jsonToCss(elem.zIndex)">
         <span>
           <span class="content" :style="elem.spanStyleToTxtBkg">
             {{ elem.txt }}
@@ -28,6 +25,15 @@ import { mapState } from 'vuex'
 
 export default {
   name: 'CuadroPlay',
+  filters: {
+    jsonToCss(json, zIndex) {
+      let cssFromJson = 'z-index:' + zIndex + ';'
+      for (let j = 0; j < json.length; j++) {
+        cssFromJson += json[j].tag + ': ' + json[j].value + json[j].unity + '; '
+      }
+      return cssFromJson
+    }
+  },
   props: {
     thisCuadroIndex: {
       type: Number,
