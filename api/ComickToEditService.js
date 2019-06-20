@@ -1,6 +1,5 @@
 export default {
   elemType: ['txt', 'character', 'txt-bkg'],
-  styleElem: ['background', 'width', 'height'],
-  stylePosition: ['top', 'left'],
+  styleElem: ['top', 'left', 'width', 'height', 'font-size'],
   styleSpan: ['padding', 'margin', 'font-size', 'width', 'height']
 }

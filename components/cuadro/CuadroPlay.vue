@@ -1,5 +1,5 @@
 <template>
-  <main id="Cuadro" class="cuadro">
+  <main id="Cuadro" class="cuadro" :style="thisCuadro.style | jsonToCss()">
     <div
       v-for="(elem, index) in thisCuadro.elem"
       :key="index"
