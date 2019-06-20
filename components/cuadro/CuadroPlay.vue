@@ -7,7 +7,20 @@
     >
       <div :class="elem.typeElem" :style="elem.style | jsonToCss(elem.zIndex)">
         <span>
-          <span class="content" :style="elem.spanStyleToTxtBkg">
+          <span
+            class="content"
+            :style="
+              'padding: ' +
+                elem.spanStyleToTxtBkg.top +
+                'px ' +
+                elem.spanStyleToTxtBkg.right +
+                '% ' +
+                elem.spanStyleToTxtBkg.bottom +
+                'px ' +
+                elem.spanStyleToTxtBkg.left +
+                '%'
+            "
+          >
             {{ elem.txt }}
           </span>
           <img v-if="elem.typeElem != 'txt'" :src="getImgUrl(elem.bkg)" />
@@ -27,9 +40,12 @@ export default {
   name: 'CuadroPlay',
   filters: {
     jsonToCss(json, zIndex) {
-      let cssFromJson = 'z-index:' + zIndex + ';'
+      let cssFromJson = 'z-index:' + zIndex + '; '
       for (let j = 0; j < json.length; j++) {
-        cssFromJson += json[j].tag + ': ' + json[j].value + json[j].unity + '; '
+        if (json[j].tag !== undefined) {
+          cssFromJson +=
+            json[j].tag + ': ' + json[j].value + json[j].unity + '; '
+        }
       }
       return cssFromJson
     }

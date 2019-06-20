@@ -44,32 +44,46 @@
               </div>
               <div class="field">
                 <div
-                  v-for="(style, indexi) in thisCuadro.style"
-                  :key="indexi"
+                  v-for="(style, index01) in thisCuadro.style"
+                  :key="index01"
                   class="field-body"
                 >
                   <div class="field-label is-normal">
                     <label class="label is-small">{{ style.tag }}</label>
                   </div>
                   <p class="control">
-                    <input class="input" type="text" :value="style.value" />
+                    <input
+                      class="input"
+                      type="number"
+                      :value="style.value"
+                      :min="style.unity === '%' ? 0 : inherit"
+                      :max="style.unity === '%' ? 100 : inherit"
+                      @input="updateCuadroStyle(style.tag, $event.target.value)"
+                    />
                   </p>
                   <div class="field-label is-normal level-right">
                     <label class="label">{{ style.unity }}</label>
                   </div>
+                  <a
+                    href="#"
+                    class="card-header-icon"
+                    aria-label="more options"
+                    @click="delStyle(-1, index01)"
+                  >
+                    <span class="icon">
+                      <i class="far fa-trash-alt" aria-hidden="true" />
+                    </span>
+                  </a>
                 </div>
               </div>
             </div>
-            <div class="field-label is-normal">
-              <label class="label">add style</label>
-            </div>
             <div class="field">
-              <select @input="updateElem(index, 'Style', $event.target.value)">
+              <select v-model="newStyleCuadro.tag">
                 <option disabled value="">Please select one</option>
                 <option
-                  v-for="(styleTag, indexS) in styleToElem"
-                  :key="indexS"
-                  :value="elemTypeLabel"
+                  v-for="(styleTag, index02) in styleToElem"
+                  :key="index02"
+                  :value="styleTag"
                 >
                   {{ styleTag }}
                 </option>
@@ -77,19 +91,24 @@
             </div>
             <div class="field">
               <p class="control">
-                <input class="input" type="Number" value="" />
+                <input
+                  v-model="newStyleCuadro.value"
+                  class="input"
+                  type="Number"
+                />
               </p>
             </div>
             <div class="field">
-              <select @input="updateElem(index, 'Style', $event.target.value)">
+              <select v-model="newStyleCuadro.unity">
                 <option disabled value="">Please select one</option>
-                <option>
-                  %
-                </option>
-                <option>
-                  px
-                </option>
+                <option value="%">%</option>
+                <option value="px">px</option>
               </select>
+            </div>
+            <div class="field">
+              <button class="button" @click="addStyle(-1, newStyleCuadro)">
+                Add
+              </button>
             </div>
           </div>
         </div>
@@ -157,8 +176,8 @@
                       "
                     >
                       <option
-                        v-for="(elemTypeLabel, indexo) in typeElemList"
-                        :key="indexo"
+                        v-for="(elemTypeLabel, index03) in typeElemList"
+                        :key="index03"
                         :value="elemTypeLabel"
                       >
                         {{ elemTypeLabel }}
@@ -178,7 +197,7 @@
                   <input
                     :value="elem.zIndex"
                     class="input"
-                    type="text"
+                    type="number"
                     @input="updateElem(index, 'zIndex', $event.target.value)"
                   />
                 </p>
@@ -225,81 +244,140 @@
               </div>
             </div>
             <div v-if="elem.typeElem === 'txt-bkg'" class="field is-horizontal">
-              <div class="field-label is-normal">
-                <label class="label is-small">spanStyleToTxtBkg</label>
-              </div>
               <div class="field-body">
+                <div class="field-label is-normal">
+                  <label class="label">spanStyleToTxtBkg</label>
+                </div>
                 <p class="control">
                   <input
-                    :value="elem.spanStyleToTxtBkg"
+                    :value="elem.spanStyleToTxtBkg.top"
                     class="input"
-                    type="text"
+                    type="Number"
+                    min="0"
                     @input="
-                      updateElem(
-                        index,
-                        'spanStyleToTxtBkg',
-                        $event.target.value
-                      )
+                      updateElemSpanStyle(index, 'top', $event.target.value)
                     "
                   />
                 </p>
+                <div class="field-label is-normal">
+                  <label class="label">px</label>
+                </div>
+                <p class="control">
+                  <input
+                    :value="elem.spanStyleToTxtBkg.right"
+                    class="input"
+                    type="Number"
+                    min="0"
+                    max="100"
+                    @input="
+                      updateElemSpanStyle(index, 'right', $event.target.value)
+                    "
+                  />
+                </p>
+                <div class="field-label is-normal">
+                  <label class="label">%</label>
+                </div>
+                <p class="control">
+                  <input
+                    :value="elem.spanStyleToTxtBkg.bottom"
+                    class="input"
+                    type="Number"
+                    min="0"
+                    @input="
+                      updateElemSpanStyle(index, 'bottom', $event.target.value)
+                    "
+                  />
+                </p>
+                <div class="field-label is-normal">
+                  <label class="label">px</label>
+                </div>
+                <p class="control">
+                  <input
+                    :value="elem.spanStyleToTxtBkg.left"
+                    class="input"
+                    type="Number"
+                    min="0"
+                    max="100"
+                    @input="
+                      updateElemSpanStyle(index, 'left', $event.target.value)
+                    "
+                  />
+                </p>
+                <div class="field-label is-normal">
+                  <label class="label">%</label>
+                </div>
               </div>
             </div>
             <div class="field is-horizontal">
-              <div class="field">
+              <div class="field-label is-normal">
+                <label class="label">style</label>
+              </div>
+              <div
+                v-for="(style, index04) in elem.style"
+                :key="index04"
+                class="field-body"
+              >
                 <div class="field-label is-normal">
-                  <label class="label">style</label>
+                  <label class="label is-small">{{ style.tag }}</label>
                 </div>
-                <div
-                  v-for="(style, indexi) in thisCuadro.style"
-                  :key="indexi"
-                  class="field-body"
+                <p class="control">
+                  <input
+                    class="input"
+                    type="number"
+                    :value="style.value"
+                    :min="style.unity === '%' ? 0 : inherit"
+                    :max="style.unity === '%' ? 100 : inherit"
+                    @input="
+                      updateElemStyle(index, style.tag, $event.target.value)
+                    "
+                  />
+                </p>
+                <div class="field-label is-normal level-right">
+                  <label class="label">{{ style.unity }}</label>
+                </div>
+                <a
+                  href="#"
+                  class="card-header-icon"
+                  aria-label="more options"
+                  @click="delStyle(index, index04)"
                 >
-                  <div class="field-label is-normal">
-                    <label class="label is-small">{{ style.tag }}</label>
-                  </div>
-                  <p class="control">
-                    <input class="input" type="text" :value="style.value" />
-                  </p>
-                  <div class="field-label is-normal level-right">
-                    <label class="label">{{ style.unity }}</label>
-                  </div>
-                </div>
-                <div class="field-label is-normal">
-                  <label class="label">add style</label>
-                </div>
-                <div class="field">
-                  <select
-                    @input="updateElem(index, 'Style', $event.target.value)"
+                  <span class="icon">
+                    <i class="far fa-trash-alt" aria-hidden="true" />
+                  </span>
+                </a>
+              </div>
+              <div class="field">
+                <select v-model="newStyleElem.tag">
+                  <option disabled value="">Please select one</option>
+                  <option
+                    v-for="(styleTag, index05) in styleToElem"
+                    :key="index05"
+                    :value="styleTag"
                   >
-                    <option disabled value="">Please select one</option>
-                    <option
-                      v-for="(styleTag, indexE) in styleToElem"
-                      :key="indexE"
-                      :value="elemTypeLabel"
-                    >
-                      {{ styleTag }}
-                    </option>
-                  </select>
-                </div>
-                <div class="field">
-                  <p class="control">
-                    <input class="input" type="Number" value="" />
-                  </p>
-                </div>
-                <div class="field">
-                  <select
-                    @input="updateElem(index, 'Style', $event.target.value)"
-                  >
-                    <option disabled value="">Please select one</option>
-                    <option>
-                      %
-                    </option>
-                    <option>
-                      px
-                    </option>
-                  </select>
-                </div>
+                    {{ styleTag }}
+                  </option>
+                </select>
+              </div>
+              <div class="field">
+                <p class="control">
+                  <input
+                    v-model="newStyleElem.value"
+                    class="input"
+                    type="Number"
+                  />
+                </p>
+              </div>
+              <div class="field">
+                <select v-model="newStyleElem.unity">
+                  <option disabled value="">Please select one</option>
+                  <option value="%">%</option>
+                  <option value="px">px</option>
+                </select>
+              </div>
+              <div class="field">
+                <button class="button" @click="addStyle(index, newStyleElem)">
+                  Add
+                </button>
               </div>
             </div>
             <div class="field is-horizontal">
@@ -315,11 +393,12 @@
                     <input
                       :value="elem.transition.enter"
                       class="input"
-                      type="text"
+                      type="number"
+                      min="0"
                       @input="
-                        updateElem(
+                        updateElemTransition(
                           index,
-                          'transition.enter',
+                          'enter',
                           $event.target.value
                         )
                       "
@@ -334,11 +413,12 @@
                     <input
                       :value="elem.transition.leave"
                       class="input"
-                      type="text"
+                      type="number"
+                      min="0"
                       @input="
-                        updateElem(
+                        updateElemTransition(
                           index,
-                          'transition.leave',
+                          'leave',
                           $event.target.value
                         )
                       "
@@ -381,6 +461,8 @@ export default {
       typeElemList: elemListToEdit.elemType,
       styleToElem: elemListToEdit.styleElem,
       thisCuadroIndexDisplay: parseInt(this.$route.params.order) + 1,
+      newStyleCuadro: {},
+      newStyleElem: {},
       thisActive: false
     }
   },
@@ -402,12 +484,61 @@ export default {
         value: value
       })
     },
+    updateCuadroStyle(key, value) {
+      this.$store.dispatch('comick/updateCuadro1Prop', {
+        order: this.thisCuadroIndex,
+        type: 'style',
+        key: key,
+        value: value
+      })
+    },
     updateElem(index, key, value) {
       this.$store.dispatch('comick/updateElem1Prop', {
         order: this.thisCuadroIndex,
         index: index,
         key: key,
         value: value
+      })
+    },
+    updateElemSpanStyle(index, key, value) {
+      this.$store.dispatch('comick/updateElem1Prop', {
+        order: this.thisCuadroIndex,
+        index: index,
+        type: 'spanStyleToTxtBkg',
+        key: key,
+        value: value
+      })
+    },
+    updateElemStyle(index, key, value) {
+      this.$store.dispatch('comick/updateElem1Prop', {
+        order: this.thisCuadroIndex,
+        index: index,
+        type: 'style',
+        key: key,
+        value: value
+      })
+    },
+    updateElemTransition(index, key, value) {
+      this.$store.dispatch('comick/updateElem1Prop', {
+        order: this.thisCuadroIndex,
+        index: index,
+        type: 'transition',
+        key: key,
+        value: value
+      })
+    },
+    addStyle(index, newStyle) {
+      this.$store.dispatch('comick/addStyle', {
+        order: this.thisCuadroIndex,
+        index: index,
+        newStyle: newStyle
+      })
+    },
+    delStyle(indexElem, indexStyle) {
+      this.$store.dispatch('comick/delStyle', {
+        order: this.thisCuadroIndex,
+        elem: indexElem,
+        indexStyle: indexStyle
       })
     },
     delElement(index) {

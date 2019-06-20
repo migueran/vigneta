@@ -42,6 +42,12 @@ export const actions = {
   },
   duplicateElem({ commit }, dataObject) {
     commit('DUPLICATE_ELEM', dataObject)
+  },
+  addStyle({ commit }, dataObject) {
+    commit('ADD_STYLE', dataObject)
+  },
+  delStyle({ commit }, dataObject) {
+    commit('DEL_STYLE', dataObject)
   }
 }
 
@@ -59,7 +65,11 @@ export const mutations = {
     state.comick.category.splice(index, 1)
   },
   UPDATE_CUADRO_1PROP(state, keyValue) {
-    state.comick.cuadros[keyValue.order][keyValue.key] = keyValue.value
+    if (keyValue.type === 'style') {
+      state.comick.cuadros[keyValue.order].style[keyValue.key] = keyValue.value
+    } else {
+      state.comick.cuadros[keyValue.order][keyValue.key] = keyValue.value
+    }
   },
   ADD_CUADRO(state, dataObject) {
     state.comick.cuadros.splice(dataObject.indexCuadro, 0, dataObject.newCuadro)
@@ -71,8 +81,13 @@ export const mutations = {
     state.comick.cuadros.splice(dataObject.indexCuadro, 0, dataObject.newCuadro)
   },
   UPDATE_ELEM_1PROP(state, keyValue) {
-    state.comick.cuadros[keyValue.order].elem[keyValue.index][keyValue.key] =
-      keyValue.value
+    if (keyValue.type !== undefined) {
+      const string = state.comick.cuadros[keyValue.order]
+      string.elem[keyValue.index][keyValue.type][keyValue.key] = keyValue.value
+    } else {
+      state.comick.cuadros[keyValue.order].elem[keyValue.index][keyValue.key] =
+        keyValue.value
+    }
   },
   DELETE_ELEM(state, order, index) {
     state.comick.cuadros[order].elem.splice(index, 1)
@@ -83,6 +98,26 @@ export const mutations = {
       0,
       dataObject.newElem
     )
+  },
+  ADD_STYLE(state, dataObject) {
+    if (dataObject.index < 0) {
+      state.comick.cuadros[dataObject.order].style.push(dataObject.newStyle)
+    } else {
+      state.comick.cuadros[dataObject.order].elem[dataObject.index].style.push(
+        dataObject.newStyle
+      )
+    }
+  },
+  DEL_STYLE(state, dataObject) {
+    if (dataObject.elem < 0) {
+      state.comick.cuadros[dataObject.order].style.splice(
+        dataObject.indexStyle,
+        1
+      )
+    } else {
+      const string = state.comick.cuadros[dataObject.order]
+      string.elem[dataObject.elem].style.splice(dataObject.indexStyle, 1)
+    }
   }
 }
 
