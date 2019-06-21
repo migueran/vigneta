@@ -40,7 +40,10 @@ export default {
   name: 'CuadroPlay',
   filters: {
     jsonToCss(json, zIndex) {
-      let cssFromJson = 'z-index:' + zIndex + '; '
+      let cssFromJson = ''
+      if (zIndex !== undefined) {
+        cssFromJson = 'z-index:' + zIndex + '; '
+      }
       for (let j = 0; j < json.length; j++) {
         if (json[j].tag !== undefined) {
           cssFromJson +=
@@ -53,7 +56,7 @@ export default {
   props: {
     thisCuadroIndex: {
       type: Number,
-      default: 0
+      default: () => parseInt(this.$route.params.order)
     },
     assets: {
       type: String,
