@@ -14,7 +14,7 @@
                 cancel
               </nuxt-link>
               <button
-                v-if="cuadrosLength < 1"
+                v-if="cuadroIndexMax < 1"
                 class="button is-text"
                 title="Add Cuadro"
                 @click="addCuadro()"
@@ -57,8 +57,8 @@ export default {
       Cuadros() {
         return this.$store.state.cuadros.cuadro
       },
-      state() {
-        return this.$store.state
+      cuadroIndexMax: function(state) {
+        return state.cuadros.cuadro.length
       },
       ...mapGetters({
         cuadrosLength: 'cuadros/getCuadrosLength'

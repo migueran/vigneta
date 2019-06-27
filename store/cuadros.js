@@ -38,10 +38,6 @@ export const actions = {
 export const mutations = {
   SET_CUADROS(state, cuadros) {
     state.cuadro = cuadros
-    /* eslint-disable-next-line no-console */
-    console.log('state.cuadros')
-    /* eslint-disable-next-line no-console */
-    console.log(state)
   },
   UPDATE_CUADRO_1PROP(state, keyValue) {
     if (keyValue.type === 'style') {
