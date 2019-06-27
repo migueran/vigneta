@@ -14,7 +14,7 @@
                 cancel
               </nuxt-link>
               <button
-                v-if="Comick.cuadros.length"
+                v-if="cuadrosLength < 1"
                 class="button is-text"
                 title="Add Cuadro"
                 @click="addCuadro()"
@@ -41,7 +41,7 @@ import HeadBar from '~/components/HeadBar'
 import ComickEdit from '~/components/comick/ComickEdit'
 import CuadroList from '~/components/cuadro/CuadroList'
 import ComicksService from '~/api/ComicksService'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -56,7 +56,10 @@ export default {
       },
       state() {
         return this.$store.state
-      }
+      },
+      ...mapGetters({
+        cuadrosLength: 'cuadros/getCuadrosLength'
+      })
     })
   },
   mounted() {
@@ -65,6 +68,10 @@ export default {
   methods: {
     getComick() {
       this.$store.dispatch('initComick', this.$route.params.id)
+      /* eslint-disable-next-line no-console */
+      console.log('state')
+      /* eslint-disable-next-line no-console */
+      console.log(this.state)
     },
     async updateComick() {
       await ComicksService.updateComickInBD(this.Comick)

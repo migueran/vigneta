@@ -469,7 +469,7 @@ export default {
   computed: {
     ...mapState({
       thisCuadro: function(state) {
-        return state.comick.cuadros[this.thisCuadroIndex]
+        return state.cuadros.cuadros[this.thisCuadroIndex]
       }
     })
   },
@@ -478,14 +478,14 @@ export default {
       document.getElementById(id).classList.toggle('active')
     },
     updateCuadro(key, value) {
-      this.$store.dispatch('comick/updateCuadro1Prop', {
+      this.$store.dispatch('cuadros/updateCuadro1Prop', {
         order: this.thisCuadroIndex,
         key: key,
         value: value
       })
     },
     updateCuadroStyle(key, value) {
-      this.$store.dispatch('comick/updateCuadro1Prop', {
+      this.$store.dispatch('cuadros/updateCuadro1Prop', {
         order: this.thisCuadroIndex,
         type: 'style',
         key: key,
@@ -493,7 +493,7 @@ export default {
       })
     },
     updateElem(index, key, value) {
-      this.$store.dispatch('comick/updateElem1Prop', {
+      this.$store.dispatch('cuadros/updateElem1Prop', {
         order: this.thisCuadroIndex,
         index: index,
         key: key,
@@ -501,7 +501,7 @@ export default {
       })
     },
     updateElemSpanStyle(index, key, value) {
-      this.$store.dispatch('comick/updateElem1Prop', {
+      this.$store.dispatch('cuadros/updateElem1Prop', {
         order: this.thisCuadroIndex,
         index: index,
         type: 'spanStyleToTxtBkg',
@@ -510,7 +510,7 @@ export default {
       })
     },
     updateElemStyle(index, key, value) {
-      this.$store.dispatch('comick/updateElem1Prop', {
+      this.$store.dispatch('cuadros/updateElem1Prop', {
         order: this.thisCuadroIndex,
         index: index,
         type: 'style',
@@ -519,7 +519,7 @@ export default {
       })
     },
     updateElemTransition(index, key, value) {
-      this.$store.dispatch('comick/updateElem1Prop', {
+      this.$store.dispatch('cuadros/updateElem1Prop', {
         order: this.thisCuadroIndex,
         index: index,
         type: 'transition',
@@ -528,25 +528,25 @@ export default {
       })
     },
     addStyle(index, newStyle) {
-      this.$store.dispatch('comick/addStyle', {
+      this.$store.dispatch('cuadros/addStyle', {
         order: this.thisCuadroIndex,
         index: index,
         newStyle: newStyle
       })
     },
     delStyle(indexElem, indexStyle) {
-      this.$store.dispatch('comick/delStyle', {
+      this.$store.dispatch('cuadros/delStyle', {
         order: this.thisCuadroIndex,
         elem: indexElem,
         indexStyle: indexStyle
       })
     },
     delElement(index) {
-      this.$store.dispatch('comick/deleteElem', this.thisCuadroIndex, index)
+      this.$store.dispatch('cuadros/deleteElem', this.thisCuadroIndex, index)
     },
     duplicateElement(index, elem) {
       delete elem._id
-      this.$store.dispatch('comick/duplicateElem', {
+      this.$store.dispatch('cuadros/duplicateElem', {
         order: this.thisCuadroIndex,
         index: index,
         newElem: elem

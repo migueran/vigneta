@@ -10,6 +10,7 @@ export const actions = {
       id: comickId
     })
     dispatch('comick/setComick', response.data, { root: true })
+    dispatch('cuadros/setCuadros', response.data.cuadros, { root: true })
   }
 }
 

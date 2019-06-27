@@ -74,7 +74,9 @@ export default {
   },
   computed: {
     ...mapState({
-      Cuadros: state => state.comick.cuadros
+      Cuadros() {
+        return this.$store.state.cuadros.cuadros
+      }
     }),
     ...mapGetters({
       title: 'comick/getTitle'
@@ -99,18 +101,18 @@ export default {
           spanStyleToTxtBkg: ''
         }
       }
-      this.$store.dispatch('comick/addCuadro', {
+      this.$store.dispatch('cuadros/addCuadro', {
         indexCuadro: indexCuadro,
         newCuadro: newCuadro
       })
     },
     deleteCuadro(index) {
-      this.$store.dispatch('comick/deleteCuadro', index)
+      this.$store.dispatch('cuadros/deleteCuadro', index)
     },
     duplicateCuadro(indexCuadro, newCuadro) {
       indexCuadro += 1
       delete newCuadro._id
-      this.$store.dispatch('comick/duplicateCuadro', {
+      this.$store.dispatch('cuadros/duplicateCuadro', {
         indexCuadro: indexCuadro,
         newCuadro: newCuadro
       })
