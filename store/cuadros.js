@@ -99,10 +99,7 @@ export const mutations = {
 
 export const getters = {
   getCuadrosLength() {
-    /* eslint-disable-next-line no-console */
-    console.log('state.cuadro')
-    /* eslint-disable-next-line no-console */
-    console.log(state.cuadro)
-    return 0
+    const cuadrosLength = 0
+    return cuadrosLength
   }
 }

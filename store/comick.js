@@ -49,5 +49,8 @@ export const mutations = {
 export const getters = {
   getTitle(state) {
     return state.title
+  },
+  getId(state) {
+    return state._id
   }
 }

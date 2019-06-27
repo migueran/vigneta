@@ -26,7 +26,7 @@
 import HeadBar from '~/components/HeadBar'
 import CuadroPlay from '~/components/cuadro/CuadroPlay'
 import CuadroCRUD from '~/components/cuadro/CuadroCRUD'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -47,13 +47,16 @@ export default {
   },
   computed: {
     ...mapState({
-      comickId: state => state.comick._id,
       cuadroIndexMax: function(state) {
         return state.cuadros.cuadro.length
       },
       thisCuadro: function(state) {
         return state.cuadros.cuadro[this.cuadroIndex]
       }
+    }),
+    ...mapGetters({
+      comickId: 'comick/getId',
+      cuadrosLength: 'cuadros/getCuadrosLength'
     })
   },
   mounted() {
