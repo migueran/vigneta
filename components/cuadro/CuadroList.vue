@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   name: 'CuadroList',
@@ -74,8 +74,10 @@ export default {
   },
   computed: {
     ...mapState({
-      title: state => state.comick.comick.title,
-      Cuadros: state => state.comick.comick.cuadros
+      Cuadros: state => state.comick.cuadros
+    }),
+    ...mapGetters({
+      title: 'comick/getTitle'
     })
   },
   methods: {

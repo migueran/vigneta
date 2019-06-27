@@ -14,7 +14,7 @@
                 cancel
               </nuxt-link>
               <button
-                v-if="Comick.cuadros.length < 1"
+                v-if="Comick.cuadros.length"
                 class="button is-text"
                 title="Add Cuadro"
                 @click="addCuadro()"
@@ -52,7 +52,10 @@ export default {
   computed: {
     ...mapState({
       Comick() {
-        return this.$store.state.comick.comick
+        return this.$store.state.comick
+      },
+      state() {
+        return this.$store.state
       }
     })
   },

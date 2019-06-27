@@ -119,7 +119,7 @@ export default {
   },
   computed: {
     ...mapState({
-      Comick: state => state.comick.comick
+      Comick: state => state.comick
     })
   },
   mounted() {

@@ -47,12 +47,12 @@ export default {
   },
   computed: {
     ...mapState({
-      comickId: state => state.comick.comick._id,
+      comickId: state => state.comick._id,
       cuadroIndexMax: function(state) {
-        return state.comick.comick.cuadros.length
+        return state.comick.cuadros.length
       },
       thisCuadro: function(state) {
-        return state.comick.comick.cuadros[this.cuadroIndex]
+        return state.comick.cuadros[this.cuadroIndex]
       }
     })
   },

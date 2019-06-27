@@ -469,7 +469,7 @@ export default {
   computed: {
     ...mapState({
       thisCuadro: function(state) {
-        return state.comick.comick.cuadros[this.thisCuadroIndex]
+        return state.comick.cuadros[this.thisCuadroIndex]
       }
     })
   },
@@ -553,7 +553,7 @@ export default {
       })
     },
     async saveCuadroInBD() {
-      const Comick = this.$store.state.comick.comick
+      const Comick = this.$store.state.comick
       await ComicksService.updateComickInBD(Comick)
     }
   }
