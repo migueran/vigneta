@@ -49,10 +49,10 @@ export default {
     ...mapState({
       comickId: state => state.comick._id,
       cuadroIndexMax: function(state) {
-        return state.cuadros.cuadros.length
+        return state.cuadros.cuadro.length
       },
       thisCuadro: function(state) {
-        return state.cuadros.cuadros[this.cuadroIndex]
+        return state.cuadros.cuadro[this.cuadroIndex]
       }
     })
   },

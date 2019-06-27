@@ -75,7 +75,7 @@ export default {
   computed: {
     ...mapState({
       Cuadros() {
-        return this.$store.state.cuadros.cuadros
+        return this.$store.state.cuadros.cuadro
       }
     }),
     ...mapGetters({

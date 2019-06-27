@@ -66,7 +66,7 @@ export default {
   computed: {
     ...mapState({
       thisCuadro: function(state) {
-        return state.cuadros.cuadros[this.thisCuadroIndex]
+        return state.cuadros.cuadro[this.thisCuadroIndex]
       }
     })
   },
