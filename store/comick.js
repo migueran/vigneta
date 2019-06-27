@@ -1,5 +1,3 @@
-import ComicksService from '~/api/ComicksService'
-
 export const state = () => ({
   authorDisplayName: '',
   author_id: '',
@@ -12,11 +10,8 @@ export const state = () => ({
 })
 
 export const actions = {
-  async setComick({ commit }, comickId) {
-    const response = await ComicksService.getComick({
-      id: comickId
-    })
-    commit('SET_COMICK', response.data)
+  setComick({ commit }, comick) {
+    commit('SET_COMICK', comick)
   },
   updateComick1Prop({ commit }, keyValue) {
     commit('UPDATE_COMICK_1PROP', keyValue)

@@ -64,7 +64,7 @@ export default {
   },
   methods: {
     getComick() {
-      this.$store.dispatch('comick/setComick', this.$route.params.id)
+      this.$store.dispatch('initComick', this.$route.params.id)
     },
     async updateComick() {
       await ComicksService.updateComickInBD(this.Comick)
