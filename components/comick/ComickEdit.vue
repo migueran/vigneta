@@ -16,7 +16,7 @@
           <p class="control">
             draft:
             <input
-              :value="Comick.draft"
+              :checked="Comick.draft"
               class="checkbox"
               type="checkbox"
               @input="updateComick('draft', $event.target.checked)"

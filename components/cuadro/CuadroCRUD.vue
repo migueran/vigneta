@@ -553,8 +553,9 @@ export default {
       })
     },
     async saveCuadroInBD() {
-      const Comick = this.$store.state.comick
-      await ComicksService.updateComickInBD(Comick)
+      const ComickToBD = this.$store.state.comick
+      ComickToBD.cuadros = this.$store.state.cuadros.cuadro
+      await ComicksService.updateComickInBD(ComickToBD)
     }
   }
 }

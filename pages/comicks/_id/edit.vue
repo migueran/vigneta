@@ -54,6 +54,9 @@ export default {
       Comick() {
         return this.$store.state.comick
       },
+      Cuadros() {
+        return this.$store.state.cuadros.cuadro
+      },
       state() {
         return this.$store.state
       },
@@ -68,13 +71,11 @@ export default {
   methods: {
     getComick() {
       this.$store.dispatch('initComick', this.$route.params.id)
-      /* eslint-disable-next-line no-console */
-      console.log('state')
-      /* eslint-disable-next-line no-console */
-      console.log(this.state)
     },
     async updateComick() {
-      await ComicksService.updateComickInBD(this.Comick)
+      const ComickToBD = this.Comick
+      ComickToBD.cuadros = this.Cuadros
+      await ComicksService.updateComickInBD(ComickToBD)
     },
     async addCuadro() {}
   }
