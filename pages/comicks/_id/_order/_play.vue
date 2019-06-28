@@ -55,20 +55,14 @@ export default {
       }
     }),
     ...mapGetters({
-      comickId: 'comick/getId',
+      comick_id: 'comick/getId',
       cuadrosLength: 'cuadros/getCuadrosLength'
     })
   },
   mounted() {
-    this.getCuadro()
     this.setEdit()
   },
   methods: {
-    getCuadro() {
-      if (this.comickId === undefined) {
-        alert('no anda')
-      }
-    },
     nextPrevUrl(value) {
       const actions = this.$route.params.play
       let indexURL = ''
@@ -80,7 +74,8 @@ export default {
       } else {
         indexURL = this.cuadroIndex + value
       }
-      const toUrl = '/comicks/' + this.comickId + '/' + indexURL + '/' + actions
+      const toUrl =
+        '/comicks/' + this.comick_id + '/' + indexURL + '/' + actions
       return toUrl
     },
     setEdit() {

@@ -26,14 +26,20 @@ export const actions = {
 
 export const mutations = {
   SET_COMICK(state, comick) {
-    state.authorDisplayName = comick.authorDisplayName
-    state.author_id = comick.author_id
-    state.category = comick.category
-    state.createdTo = comick.createdTo
-    state.description = comick.description
-    state.draft = comick.draft
-    state.title = comick.title
-    state._id = comick._id
+    if (state._id !== comick._id) {
+      state.authorDisplayName = comick.authorDisplayName
+      state.author_id = comick.author_id
+      state.category = comick.category
+      state.createdTo = comick.createdTo
+      state.description = comick.description
+      state.draft = comick.draft
+      state.title = comick.title
+      state._id = comick._id
+    } else {
+      alert('son iguales')
+    }
+    // eslint-disable-next-line no-console
+    console.log(state)
   },
   UPDATE_COMICK_1PROP(state, keyValue) {
     state[keyValue.key] = keyValue.value

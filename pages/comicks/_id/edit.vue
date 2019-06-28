@@ -61,7 +61,8 @@ export default {
         return state.cuadros.cuadro.length
       },
       ...mapGetters({
-        cuadrosLength: 'cuadros/getCuadrosLength'
+        cuadrosLength: 'cuadros/getCuadrosLength',
+        comick_id: 'comick/getId'
       })
     })
   },
@@ -70,7 +71,10 @@ export default {
   },
   methods: {
     getComick() {
-      this.$store.dispatch('initComick', this.$route.params.id)
+      const newId = this.$route.params.id
+      if (newId !== this.comick_id) {
+        this.$store.dispatch('initComick', newId)
+      }
     },
     async updateComick() {
       const ComickToBD = this.Comick
